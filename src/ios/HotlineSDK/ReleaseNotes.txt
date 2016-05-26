@@ -1,0 +1,87 @@
+Hotline iOS SDK - Powered by Freshdesk
+
+Documentation   : https://hotline.freshdesk.com/support/solutions
+Support Email   : support@hotline.io 
+Version         : 1.0.13
+
+Ver 1.0.13 
+__________________________
+Add Statusbar customization
+
+Ver 1.0.12 
+__________________________
+Fixed Headsup Notification popping up when Push is disabled 
+
+Ver 1.0.11 
+__________________________
+Improved message fetch 
+Fixed crashes for property updates 
+Minor UI Fixes 
+
+Ver 1.0.10 
+__________________________
+Fix 24 hour time alignment issue 
+Fix jitter in channel view
+
+Ver 1.0.9 
+__________________________
+Fix duplicate symbol error
+
+Ver 1.0.8 
+__________________________
+Fixed Jiggle in message box when typing
+Fixed Issue where empty view image was overlayed over article list
+Removed unused keys in Theming file
+Fixed tab bar title getting overridden when using embedded controller
+Fixed crash for missing AdId
+
+Ver 1.0.7 
+__________________________
+Fixed time being truncated on the channel list 
+Minor UI fixes on the channel list 
+Fixed a rare crash on migration from konotor to hotline SDK
+
+Ver 1.0.6 
+__________________________
+Fix chat bubble image
+
+Ver 1.0.5 
+__________________________
+In-App notification banner is now shown when push notification is disabled and a message arrives
+SDK now uses tint color instead of images for Navigation bar
+Fixed alignment issue when scrolling on Category and Channel views
+New theme entry to customize status bar ( can be set to UIStatusBarStyleLightContent )  
+Minor UI fixes and enhancements. 
+
+Ver 1.0.4 
+__________________________
+Fixed polling issue on iOS 9.1 & 9.2
+Fixed https://github.com/freshdesk/hotline-ios/issues/3
+
+Ver 1.0.3 
+__________________________
+clearData with a completion block to avoid timing issues.
+Support for polling when app Active
+Push Notification alert Now invokes Push Notification Permission dialog when applicable.
+Fixed Push Notification not working after clearData
+Added Empty State Views for Channels and Articles
+Fallback to Native Back button when image is missing
+Updated Theming
+UI Improvements
+
+Ver 1.0.2 
+__________________________
+Fix bundle executable warning for appstore submission.
+
+Ver 1.0.1
+__________________________
+
+Offline indicator for rich media FAQs 
+Theming updates and fixes 
+Fixed Duplicate user when changing API keys
+Minor UI fixes.
+
+Ver 1.0
+__________________________
+
+Initial Release. 

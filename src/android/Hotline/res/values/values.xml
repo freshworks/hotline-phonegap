@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="reference" name="hotlineAgentMessageTextAppearance"/>
+    <attr format="reference" name="hotlineAgentMessageTimeTextAppearance"/>
+    <attr format="reference" name="hotlineAgentNameTextAppearance"/>
+    <attr format="reference" name="hotlineArticleDownvoteStyle"/>
+    <attr format="reference" name="hotlineArticleListEmptyWarningTextAppearance"/>
+    <attr format="reference" name="hotlineArticleListItemStyle"/>
+    <attr format="reference" name="hotlineArticleListStyle"/>
+    <attr format="reference" name="hotlineArticleTitleTextAppearance"/>
+    <attr format="reference" name="hotlineArticleUpvoteStyle"/>
+    <attr format="reference" name="hotlineArticleVotingPromptTextStyle"/>
+    <attr format="reference" name="hotlineAttachIcon"/>
+    <attr format="reference" name="hotlineAvatarIcon"/>
+    <attr format="reference" name="hotlineCancelIcon"/>
+    <attr format="reference" name="hotlineCategoryAltIconStyle"/>
+    <attr format="reference" name="hotlineCategoryDescriptionTextAppearance"/>
+    <attr format="reference" name="hotlineCategoryListEmptyWarningTextAppearance"/>
+    <attr format="reference" name="hotlineCategoryListItemStyle"/>
+    <attr format="reference" name="hotlineCategoryNameTextAppearance"/>
+    <attr format="reference" name="hotlineChannelAltIconStyle"/>
+    <attr format="reference" name="hotlineChannelDescriptionTextAppearance"/>
+    <attr format="reference" name="hotlineChannelLastUpdatedTextAppearance"/>
+    <attr format="reference" name="hotlineChannelListEmptyWarningTextAppearance"/>
+    <attr format="reference" name="hotlineChannelListItemStyle"/>
+    <attr format="reference" name="hotlineChannelNameTextAppearance"/>
+    <attr format="reference" name="hotlineChannelUnreadCountTextAppearance"/>
+    <attr format="reference" name="hotlineChatBubbleLeft"/>
+    <attr format="reference" name="hotlineChatBubbleRight"/>
+    <attr format="reference" name="hotlineContactUsIcon"/>
+    <attr format="reference" name="hotlineContactUsTextAppearance"/>
+    <attr format="reference" name="hotlineConversationBannerMessageStyle"/>
+    <attr format="boolean" name="hotlineDisplayCategoryAsGrid"/>
+    <attr format="reference" name="hotlineEarpieceIcon"/>
+    <attr format="reference" name="hotlineMessageDeepLinkStyle"/>
+    <attr format="reference" name="hotlineMessageListItemStyle"/>
+    <attr format="reference" name="hotlineMessageListStyle"/>
+    <attr format="reference" name="hotlineMessageReplyEditTextViewStyle"/>
+    <attr format="reference" name="hotlinePlayIcon"/>
+    <attr format="reference" name="hotlineRecordIcon"/>
+    <attr format="reference" name="hotlineSearchIcon"/>
+    <attr format="reference" name="hotlineSendIcon"/>
+    <attr format="reference" name="hotlineSpeakerIcon"/>
+    <attr format="reference" name="hotlineStopIcon"/>
+    <attr format="reference" name="hotlineUserMessageTextAppearance"/>
+    <attr format="reference" name="hotlineUserMessageTimeTextAppearance"/>
+    <attr format="reference" name="hotlineVoiceMessageDurationTextAppearance"/>
+    <attr format="reference" name="hotlineVoiceMessageSeekbar"/>
+    <attr format="reference" name="hotlineVoiceMessageSeekbarThumb"/>
+    <attr format="reference" name="hotlineVoiceVisualizer"/>
+    <color name="hotline_article_list_divider">#C7C7C7</color>
+    <color name="hotline_background_color">#EFEFEF</color>
+    <color name="hotline_background_grey">#696969</color>
+    <color name="hotline_category_alt_text_bg">#2196F3</color>
+    <color name="hotline_channel_alt_text_bg">#3F51B5</color>
+    <color name="hotline_channel_unread_count_bg">#D32F2F</color>
+    <color name="hotline_contact_us_btn_bg_normal">#2196F3</color>
+    <color name="hotline_contact_us_btn_bg_pressed">#1976D2</color>
+    <color name="hotline_message_list_bg">#EFEFEF</color>
+    <color name="hotline_message_list_divider">#EFEFEF</color>
+    <color name="hotline_message_list_item_bg">#EFEFEF</color>
+    <color name="hotline_message_list_reply_view_divider">#D0D0D0</color>
+    <color name="hotline_message_read">#F0F0F0</color>
+    <color name="hotline_message_reply_hint_text">#606060</color>
+    <color name="hotline_message_reply_text">#252525</color>
+    <color name="hotline_notification_accent_color">@android:color/transparent</color>
+    <color name="hotline_seekbar_bg_center">#000000</color>
+    <color name="hotline_seekbar_bg_end">#000000</color>
+    <color name="hotline_seekbar_bg_start">#000000</color>
+    <color name="hotline_seekbar_progress_center">#505050</color>
+    <color name="hotline_seekbar_progress_end">#505050</color>
+    <color name="hotline_seekbar_progress_start">#505050</color>
+    <color name="hotline_seekbar_sec_progress_center">#80FFB600</color>
+    <color name="hotline_seekbar_sec_progress_end">#A0FFCB00</color>
+    <color name="hotline_seekbar_sec_progress_start">#80FFD300</color>
+    <color name="hotline_text_color">#707070</color>
+    <color name="hotline_theme_color">#505050</color>
+    <color name="hotline_visualizer_bg_center">#FFFFFF</color>
+    <color name="hotline_visualizer_bg_end">#FFFFFF</color>
+    <color name="hotline_visualizer_bg_start">#FFFFFF</color>
+    <color name="hotline_visualizer_progress_center">#505050</color>
+    <color name="hotline_visualizer_progress_end">#505050</color>
+    <color name="hotline_visualizer_progress_start">#505050</color>
+    <color name="hotline_visualizer_sec_progress_center">#80FFB600</color>
+    <color name="hotline_visualizer_sec_progress_end">#A0FFCB00</color>
+    <color name="hotline_visualizer_sec_progress_start">#80FFD300</color>
+    <color name="hotline_voting_view_divider">#BBB</color>
+    <dimen name="hotline_category_icon_alt_view_size">48dp</dimen>
+    <dimen name="hotline_category_icon_padding">16dp</dimen>
+    <dimen name="hotline_category_icon_size">72dp</dimen>
+    <dimen name="hotline_channel_icon_alt_view_size">48dp</dimen>
+    <dimen name="hotline_channel_icon_padding">8dp</dimen>
+    <dimen name="hotline_channel_icon_size">72dp</dimen>
+    <dimen name="hotline_default_icon_padding">4dp</dimen>
+    <dimen name="hotline_default_icon_size">44dp</dimen>
+    <dimen name="hotline_message_attach_icon_padding">@dimen/hotline_default_icon_padding</dimen>
+    <dimen name="hotline_message_attach_icon_size">@dimen/hotline_default_icon_size</dimen>
+    <dimen name="hotline_message_avatar_icon_padding">@dimen/hotline_default_icon_padding</dimen>
+    <dimen name="hotline_message_avatar_icon_size">48dp</dimen>
+    <dimen name="hotline_message_bubble_margin">4dp</dimen>
+    <dimen name="hotline_message_bubble_padding">4dp</dimen>
+    <dimen name="hotline_message_cancel_icon_padding">@dimen/hotline_default_icon_padding</dimen>
+    <dimen name="hotline_message_cancel_icon_size">@dimen/hotline_default_icon_size</dimen>
+    <dimen name="hotline_message_lisitem_divider_height">8dp</dimen>
+    <dimen name="hotline_message_reply_frame_min_height">60dp</dimen>
+    <dimen name="hotline_message_send_icon_padding">@dimen/hotline_default_icon_padding</dimen>
+    <dimen name="hotline_message_send_icon_size">@dimen/hotline_default_icon_size</dimen>
+    <dimen name="hotline_message_upload_status_icon_padding">@dimen/hotline_default_icon_padding</dimen>
+    <dimen name="hotline_message_upload_status_icon_size">16dp</dimen>
+    <dimen name="hotline_message_voice_play_icon_size">36dp</dimen>
+    <dimen name="hotline_notification_large_icon_size">40dp</dimen>
+    <dimen name="hotline_voting_view_divider_height">1dp</dimen>
+    <integer name="hotline_channel_desc_max_lines">1</integer>
+    <integer name="hotline_channel_name_max_lines">1</integer>
+    <string name="hotline_activity_title_article_detail">FAQ</string>
+    <string name="hotline_activity_title_article_list">FAQs</string>
+    <string name="hotline_activity_title_category_list">FAQs</string>
+    <string name="hotline_activity_title_channel_list">Support</string>
+    <string name="hotline_article_list_empty_message">There are no FAQs available</string>
+    <string name="hotline_category_list_empty_message">There are no FAQs available</string>
+    <string name="hotline_channel_list_empty_message">There are no message channels available</string>
+    <string name="hotline_content_description_upload_status">upload_status</string>
+    <string name="hotline_description_attach_image">Attach Image</string>
+    <string name="hotline_description_send_message">Send message</string>
+    <string name="hotline_description_voice_message">Send voice message</string>
+    <string name="hotline_error_message_no_network_connection">Unable to connect to the internet</string>
+    <string name="hotline_error_no_matching_solution_articles_found">No matching solution articles found !</string>
+    <string name="hotline_hint_compose_message">Type a message</string>
+    <string name="hotline_hint_solutions_search_query_hint">Search our knowledge base</string>
+    <string name="hotline_label_agent_name">Support</string>
+    <string name="hotline_label_article_downvote">No</string>
+    <string name="hotline_label_article_upvote">Yes</string>
+    <string name="hotline_label_contactus">Contact Us</string>
+    <string name="hotline_label_deeplink">View</string>
+    <string name="hotline_label_deeplink_article">View FAQ</string>
+    <string name="hotline_label_downloading">Downloading...</string>
+    <string name="hotline_label_duration">Duration</string>
+    <string name="hotline_label_myconversations">My Conversations</string>
+    <string name="hotline_label_no">No</string>
+    <string name="hotline_label_picture_capture_from_camera">Take a picture</string>
+    <string name="hotline_label_picture_pick_from_gallery">Upload from gallery</string>
+    <string name="hotline_label_recording">Recording</string>
+    <string name="hotline_label_send_message">Send message</string>
+    <string name="hotline_label_support_solutions_list_label">FAQs</string>
+    <string name="hotline_label_user_name">You</string>
+    <string name="hotline_label_video_loading_message">Loading Video. Please Wait!</string>
+    <string name="hotline_label_voice_message">Voice Message</string>
+    <string name="hotline_label_yes">Yes</string>
+    <string name="hotline_menu_item_title_contact_us">Contact Us</string>
+    <string name="hotline_menu_item_title_search_solutions">Search</string>
+    <string name="hotline_menu_item_title_toggle_speaker">Toggle speakerphone</string>
+    <string name="hotline_message_failed_to_load_solution_article">Unable to load this article</string>
+    <string name="hotline_message_from_db">Message cannot be displayed. Please upgrade your app to view this message</string>
+    <string name="hotline_message_image_Saved">New Image saved:</string>
+    <string name="hotline_message_image_not_saved">Image could not be saved.</string>
+    <string name="hotline_message_retry_message">Could not send message. Will try again later</string>
+    <string name="hotline_message_short_message">The message you are trying to send spans less than a second. Are you sure you want to send it ?</string>
+    <string name="hotline_message_short_message_title">Message Too Short</string>
+    <string name="hotline_message_speaker_phone_off">"Audio will play through your phone's speaker"</string>
+    <string name="hotline_message_speaker_phone_on">Audio will play through your ear piece</string>
+    <string name="hotline_message_text_copied">Message text copied to clipboard</string>
+    <string name="hotline_message_vote_successful">Thank you for your Feedback!</string>
+    <string name="hotline_solutions_vote_prompt">Was this solution helpful?</string>
+    <string name="hotline_warning_multimedia_article_network_not_connected">Please connect to the internet to view the rich media content present in this FAQ</string>
+    <style name="TextAppearance.Hotline" parent="TextAppearance.AppCompat"/>
+    <style name="TextAppearance.Hotline.AgentMessage" parent="TextAppearance.Hotline.Medium">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.Hotline.AgentMessageTime" parent="TextAppearance.Hotline.Small">
+        <item name="android:textColor">@color/hotline_text_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="TextAppearance.Hotline.AgentName" parent="TextAppearance.Hotline.Small">
+        <item name="android:textColor">@color/hotline_text_color</item>
+    </style>
+    <style name="TextAppearance.Hotline.ArticleListEmptyText" parent="TextAppearance.Hotline.Medium"/>
+    <style name="TextAppearance.Hotline.ArticleTitle" parent="TextAppearance.Hotline.Medium"/>
+    <style name="TextAppearance.Hotline.CategoryDescription" parent="TextAppearance.Hotline"/>
+    <style name="TextAppearance.Hotline.CategoryListEmptyText" parent="TextAppearance.Hotline.Medium"/>
+    <style name="TextAppearance.Hotline.CategoryName" parent="TextAppearance.Hotline.Medium"/>
+    <style name="TextAppearance.Hotline.ChannelDescription" parent="TextAppearance.Hotline.Medium">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.Hotline.ChannelLastUpdated" parent="TextAppearance.Hotline.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="TextAppearance.Hotline.ChannelListEmptyText" parent="TextAppearance.Hotline.Medium"/>
+    <style name="TextAppearance.Hotline.ChannelName" parent="TextAppearance.Hotline.Medium">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.Hotline.ChannelUnreadCount" parent="TextAppearance.Hotline.Medium">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="TextAppearance.Hotline.ContactUs" parent="TextAppearance.Hotline.Medium">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="TextAppearance.Hotline.Large" parent="TextAppearance.AppCompat.Large"/>
+    <style name="TextAppearance.Hotline.Medium" parent="TextAppearance.AppCompat.Medium"/>
+    <style name="TextAppearance.Hotline.MessageDeepLink" parent="TextAppearance.Hotline.Medium">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="TextAppearance.Hotline.Small" parent="TextAppearance.AppCompat.Small"/>
+    <style name="TextAppearance.Hotline.UserMessage" parent="TextAppearance.Hotline.Medium">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.Hotline.UserMessageTime" parent="TextAppearance.Hotline.Small">
+        <item name="android:textColor">@color/hotline_text_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="TextAppearance.Hotline.VoiceMessageDuration" parent="TextAppearance.Hotline.Small">
+        <item name="android:textColor">@color/hotline_text_color</item>
+    </style>
+    <style name="Theme.Hotline.Light" parent="@style/Theme.AppCompat.Light">
+        <!-- Action Icons -->
+        <item name="hotlinePlayIcon">@drawable/hotline_ic_play</item>
+        <item name="hotlineStopIcon">@drawable/hotline_ic_stop</item>
+        <item name="hotlineSendIcon">@drawable/hotline_ic_send</item>
+        <item name="hotlineCancelIcon">@drawable/hotline_ic_cancel</item>
+        <item name="hotlineAttachIcon">@drawable/hotline_ic_attach</item>
+        <item name="hotlineRecordIcon">@drawable/hotline_ic_record</item>
+
+        <!-- ActionBar Menu Icons -->
+        <item name="hotlineSearchIcon">@drawable/hotline_ic_action_search_light</item>
+        <item name="hotlineSpeakerIcon">@null</item>
+        <item name="hotlineEarpieceIcon">@null</item>
+
+        <!-- Misc Icons-->
+        <item name="hotlineAvatarIcon">@null</item>
+        <item name="hotlineContactUsIcon">@drawable/hotline_ic_action_contact_us</item>
+
+        <!-- Chat Bubbles -->
+        <item name="hotlineChatBubbleLeft">@drawable/hotline_chat_bubble_left</item>
+        <item name="hotlineChatBubbleRight">@drawable/hotline_chat_bubble_right</item>
+
+        <!-- Misc Drawables -->
+        <item name="hotlineVoiceVisualizer">@drawable/hotline_voice_visualizer_drawable</item>
+        <item name="hotlineVoiceMessageSeekbar">@drawable/hotline_voice_message_seekbar</item>
+        <item name="hotlineVoiceMessageSeekbarThumb">@drawable/hotline_voice_message_seekbar_thumb</item>
+
+        <!-- Message Widget Styles -->
+        <item name="hotlineMessageListStyle">@style/Widget.Hotline.MessageList</item>
+        <item name="hotlineMessageListItemStyle">@style/Widget.Hotline.MessageListItem</item>
+        <item name="hotlineMessageDeepLinkStyle">@style/Widget.Hotline.MessageDeepLinkButton</item>
+        <item name="hotlineMessageReplyEditTextViewStyle">@style/Widget.Hotline.MessageReplyEditText</item>
+        <item name="hotlineConversationBannerMessageStyle">@style/Widget.Hotline.ConversationBannerMessage</item>
+
+        <!-- Message Text Styles -->
+        <item name="hotlineAgentNameTextAppearance">@style/TextAppearance.Hotline.AgentName</item>
+        <item name="hotlineUserMessageTextAppearance">@style/TextAppearance.Hotline.UserMessage</item>
+        <item name="hotlineAgentMessageTextAppearance">@style/TextAppearance.Hotline.AgentMessage</item>
+        <item name="hotlineUserMessageTimeTextAppearance">@style/TextAppearance.Hotline.UserMessageTime</item>
+        <item name="hotlineAgentMessageTimeTextAppearance">@style/TextAppearance.Hotline.AgentMessageTime</item>
+        <item name="hotlineVoiceMessageDurationTextAppearance">@style/TextAppearance.Hotline.VoiceMessageDuration</item>
+
+        <!-- Channel Widget Styles -->
+        <item name="hotlineChannelListItemStyle">@style/Widget.Hotline.ChannelListItem</item>
+        <item name="hotlineChannelAltIconStyle">@style/Widget.Hotline.ChannelAltIcon</item>
+
+        <!-- Channel Text Styles -->
+        <item name="hotlineChannelNameTextAppearance">@style/TextAppearance.Hotline.ChannelName</item>
+        <item name="hotlineChannelDescriptionTextAppearance">@style/TextAppearance.Hotline.ChannelDescription</item>
+        <item name="hotlineChannelLastUpdatedTextAppearance">@style/TextAppearance.Hotline.ChannelLastUpdated</item>
+        <item name="hotlineChannelUnreadCountTextAppearance">@style/TextAppearance.Hotline.ChannelUnreadCount</item>
+        <item name="hotlineChannelListEmptyWarningTextAppearance">@style/TextAppearance.Hotline.ChannelListEmptyText</item>
+
+        <!-- FAQ Category Widget Styles -->
+        <item name="hotlineCategoryListItemStyle">@style/Widget.Hotline.CategoryListItem</item>
+        <item name="hotlineCategoryAltIconStyle">@style/Widget.Hotline.CategoryAltIcon</item>
+
+        <!-- FAQ Category Text Styles -->
+        <item name="hotlineCategoryNameTextAppearance">@style/TextAppearance.Hotline.CategoryName</item>
+        <item name="hotlineCategoryDescriptionTextAppearance">@style/TextAppearance.Hotline.CategoryDescription</item>
+        <item name="hotlineCategoryListEmptyWarningTextAppearance">@style/TextAppearance.Hotline.CategoryListEmptyText</item>
+
+        <!-- FAQ/Article List Widget Styles -->
+        <item name="hotlineArticleListStyle">@style/Widget.Hotline.ArticleList</item>
+        <item name="hotlineArticleListItemStyle">@style/Widget.Hotline.ArticleListItem</item>
+
+        <!-- FAQ/Article List Text Styles -->
+        <item name="hotlineArticleTitleTextAppearance">@style/TextAppearance.Hotline.ArticleTitle</item>
+        <item name="hotlineArticleListEmptyWarningTextAppearance">@style/TextAppearance.Hotline.ArticleListEmptyText</item>
+
+        <!-- FAQ/Article Detail Widget Styles -->
+        <item name="hotlineArticleUpvoteStyle">@style/Widget.Hotline.ArticleUpvoteButton</item>
+        <item name="hotlineArticleDownvoteStyle">@style/Widget.Hotline.ArticleDownvoteButton</item>
+        <item name="hotlineArticleVotingPromptTextStyle">@style/Widget.Hotline.ArticleVotingPromptText</item>
+
+        <!-- Misc Styles -->
+        <item name="hotlineContactUsTextAppearance">@style/TextAppearance.Hotline.ContactUs</item>
+    </style>
+    <style name="Theme.Hotline.Light.DarkActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+
+        <!-- Action Icons -->
+        <item name="hotlinePlayIcon">@drawable/hotline_ic_play</item>
+        <item name="hotlineStopIcon">@drawable/hotline_ic_stop</item>
+        <item name="hotlineSendIcon">@drawable/hotline_ic_send</item>
+        <item name="hotlineCancelIcon">@drawable/hotline_ic_cancel</item>
+        <item name="hotlineAttachIcon">@drawable/hotline_ic_attach</item>
+        <item name="hotlineRecordIcon">@drawable/hotline_ic_record</item>
+
+        <!-- Menu Icons -->
+        <item name="hotlineSearchIcon">@drawable/hotline_ic_action_search_dark</item>
+        <item name="hotlineSpeakerIcon">@null</item>
+        <item name="hotlineEarpieceIcon">@null</item>
+
+        <!-- Misc Icons-->
+        <item name="hotlineAvatarIcon">@null</item>
+        <item name="hotlineContactUsIcon">@drawable/hotline_ic_action_contact_us</item>
+
+        <!-- Chat Bubbles -->
+        <item name="hotlineChatBubbleLeft">@drawable/hotline_chat_bubble_left</item>
+        <item name="hotlineChatBubbleRight">@drawable/hotline_chat_bubble_right</item>
+
+        <!-- Misc Drawables -->
+        <item name="hotlineVoiceVisualizer">@drawable/hotline_voice_visualizer_drawable</item>
+        <item name="hotlineVoiceMessageSeekbar">@drawable/hotline_voice_message_seekbar</item>
+        <item name="hotlineVoiceMessageSeekbarThumb">@drawable/hotline_voice_message_seekbar_thumb</item>
+
+        <!-- Message Widget Styles -->
+        <item name="hotlineMessageListStyle">@style/Widget.Hotline.MessageList</item>
+        <item name="hotlineMessageListItemStyle">@style/Widget.Hotline.MessageListItem</item>
+        <item name="hotlineMessageDeepLinkStyle">@style/Widget.Hotline.MessageDeepLinkButton</item>
+        <item name="hotlineMessageReplyEditTextViewStyle">@style/Widget.Hotline.MessageReplyEditText</item>
+        <item name="hotlineConversationBannerMessageStyle">@style/Widget.Hotline.ConversationBannerMessage</item>
+
+        <!-- Message Text Styles -->
+        <item name="hotlineAgentNameTextAppearance">@style/TextAppearance.Hotline.AgentName</item>
+        <item name="hotlineUserMessageTextAppearance">@style/TextAppearance.Hotline.UserMessage</item>
+        <item name="hotlineAgentMessageTextAppearance">@style/TextAppearance.Hotline.AgentMessage</item>
+        <item name="hotlineUserMessageTimeTextAppearance">@style/TextAppearance.Hotline.UserMessageTime</item>
+        <item name="hotlineAgentMessageTimeTextAppearance">@style/TextAppearance.Hotline.AgentMessageTime</item>
+        <item name="hotlineVoiceMessageDurationTextAppearance">@style/TextAppearance.Hotline.VoiceMessageDuration</item>
+
+        <!-- Channel Widget Styles -->
+        <item name="hotlineChannelListItemStyle">@style/Widget.Hotline.ChannelListItem</item>
+        <item name="hotlineChannelAltIconStyle">@style/Widget.Hotline.ChannelAltIcon</item>
+
+        <!-- Channel Text Styles -->
+        <item name="hotlineChannelNameTextAppearance">@style/TextAppearance.Hotline.ChannelName</item>
+        <item name="hotlineChannelDescriptionTextAppearance">@style/TextAppearance.Hotline.ChannelDescription</item>
+        <item name="hotlineChannelLastUpdatedTextAppearance">@style/TextAppearance.Hotline.ChannelLastUpdated</item>
+        <item name="hotlineChannelUnreadCountTextAppearance">@style/TextAppearance.Hotline.ChannelUnreadCount</item>
+        <item name="hotlineChannelListEmptyWarningTextAppearance">@style/TextAppearance.Hotline.ChannelListEmptyText</item>
+
+        <!-- FAQ Category Widget Styles -->
+        <item name="hotlineCategoryListItemStyle">@style/Widget.Hotline.CategoryListItem</item>
+        <item name="hotlineCategoryAltIconStyle">@style/Widget.Hotline.CategoryAltIcon</item>
+
+        <!-- FAQ Category Text Styles -->
+        <item name="hotlineCategoryNameTextAppearance">@style/TextAppearance.Hotline.CategoryName</item>
+        <item name="hotlineCategoryDescriptionTextAppearance">@style/TextAppearance.Hotline.CategoryDescription</item>
+        <item name="hotlineCategoryListEmptyWarningTextAppearance">@style/TextAppearance.Hotline.CategoryListEmptyText</item>
+
+        <!-- FAQ/Article List Widget Styles -->
+        <item name="hotlineArticleListStyle">@style/Widget.Hotline.ArticleList</item>
+        <item name="hotlineArticleListItemStyle">@style/Widget.Hotline.ArticleListItem</item>
+
+        <!-- FAQ/Article List Text Styles -->
+        <item name="hotlineArticleTitleTextAppearance">@style/TextAppearance.Hotline.ArticleTitle</item>
+        <item name="hotlineArticleListEmptyWarningTextAppearance">@style/TextAppearance.Hotline.ArticleListEmptyText</item>
+
+        <!-- FAQ/Article Detail Widget Styles -->
+        <item name="hotlineArticleUpvoteStyle">@style/Widget.Hotline.ArticleUpvoteButton</item>
+        <item name="hotlineArticleDownvoteStyle">@style/Widget.Hotline.ArticleDownvoteButton</item>
+        <item name="hotlineArticleVotingPromptTextStyle">@style/Widget.Hotline.ArticleVotingPromptText</item>
+
+        <!-- Misc Styles -->
+        <item name="hotlineContactUsTextAppearance">@style/TextAppearance.Hotline.ContactUs</item>
+    </style>
+    <style name="Theme.Hotline.SelectedTheme" parent="@style/Theme.Hotline.Light.DarkActionBar"/>
+    <style name="Widget"/>
+    <style name="Widget.Hotline"/>
+    <style name="Widget.Hotline.ArticleDownvoteButton" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:text">@string/hotline_label_article_downvote</item>
+    </style>
+    <style name="Widget.Hotline.ArticleList">
+        <item name="android:divider">@color/hotline_article_list_divider</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+    </style>
+    <style name="Widget.Hotline.ArticleListItem">
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+    <style name="Widget.Hotline.ArticleUpvoteButton" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:text">@string/hotline_label_article_upvote</item>
+    </style>
+    <style name="Widget.Hotline.ArticleVotingPromptText">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:text">@string/hotline_solutions_vote_prompt</item>
+    </style>
+    <style name="Widget.Hotline.CategoryAltIcon">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/hotline_category_alt_text_bg</item>
+        <item name="android:layout_margin">@dimen/hotline_category_icon_padding</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:layout_width">@dimen/hotline_category_icon_alt_view_size</item>
+        <item name="android:layout_height">@dimen/hotline_category_icon_alt_view_size</item>
+    </style>
+    <style name="Widget.Hotline.CategoryListItem">
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+    <style name="Widget.Hotline.ChannelAltIcon">
+        <item name="android:layout_height">@dimen/hotline_channel_icon_alt_view_size</item>
+        <item name="android:layout_width">@dimen/hotline_channel_icon_alt_view_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/hotline_channel_alt_text_bg</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:layout_margin">@dimen/hotline_channel_icon_padding</item>
+    </style>
+    <style name="Widget.Hotline.ChannelDescription">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">@integer/hotline_channel_desc_max_lines</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">8dp</item>
+    </style>
+    <style name="Widget.Hotline.ChannelListItem">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:padding">8dp</item>
+    </style>
+    <style name="Widget.Hotline.ChannelName">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">@integer/hotline_channel_name_max_lines</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">8dp</item>
+    </style>
+    <style name="Widget.Hotline.ConversationBannerMessage">
+        <item name="android:background">@color/hotline_contact_us_btn_bg_normal</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAppearance">@style/TextAppearance.Hotline.Medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">16dp</item>
+    </style>
+    <style name="Widget.Hotline.MessageDeepLinkButton" parent="Widget.AppCompat.Button">
+        <item name="android:textAppearance">@style/TextAppearance.Hotline.MessageDeepLink</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/hotline_label_deeplink</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:minWidth">100dp</item>
+    </style>
+    <style name="Widget.Hotline.MessageList">
+        <item name="android:background">@color/hotline_message_list_bg</item>
+        <item name="android:divider">@color/hotline_message_list_divider</item>
+        <item name="android:dividerHeight">@dimen/hotline_message_lisitem_divider_height</item>
+        <item name="android:stackFromBottom">true</item>
+        <item name="android:transcriptMode">alwaysScroll</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+    <style name="Widget.Hotline.MessageListItem">
+        <item name="android:background">@color/hotline_message_list_item_bg</item>
+    </style>
+    <style name="Widget.Hotline.MessageReplyEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@null</item>
+        <item name="android:hint">@string/hotline_hint_compose_message</item>
+        <item name="android:inputType">textMultiLine|textCapSentences</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">@dimen/hotline_message_send_icon_size</item>
+        <item name="android:maxLines">4</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">@color/hotline_message_reply_text</item>
+        <item name="android:textColorHint">@color/hotline_message_reply_hint_text</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>

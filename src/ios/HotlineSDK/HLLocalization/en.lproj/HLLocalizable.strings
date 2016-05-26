@@ -1,0 +1,88 @@
+/* 
+  Localizable.strings
+  Hotline
+
+  Copyright (c) 2015 Freshdesk. All rights reserved.
+*/
+
+/* Solution Categories*/
+"faq_title_text"="FAQs";
+"faq_close_button_text"="Close";
+"contact_us_button_text"="Contact Us";
+
+/* Article UpVote DownVote */
+"article_vote_prompt_text"="Was this helpful?";
+"article_vote_prompt_yes_button_text"="Yes!";
+"article_vote_prompt_no_button_text"="No";
+
+/* Article Vote thank you prompt */
+"thank_you_prompt_text"="Thanks for your feedback";
+"thank_you_prompt_contact_us_button_text"="Still need help? Contact Us";
+
+/* Article Detail */
+"offline_missing_content_text"="Please connect to the internet to view media content available on this article.";
+
+/*Channels*/
+"channels_title_text"="Talk to us";
+"channels_close_button_text"="Close";
+
+/* Message UI */
+"message_placeholder_text" = "Type a message";
+"messages_close_button_text"="Close";
+"send_button_text"="Send";
+"messages_support_label_text"="Support";
+"messages_user_label_text"="You";
+"default_action_button_text"="View";
+
+"audio_message_title"="Audio message";
+"picture_message_title"="Picture message";
+"picture_message_upload_error"="Error loading picture message.Image Not Found";
+
+"audio_recording"="Audio Recording";
+"audio_recording_stopped"="Recording Stopped";
+"audio_recording_permission_denied"="Permission missing. Please enable Microphone permission under Settings.";
+
+"cancel_audio_recording_alert"="Are you sure you want to cancel recording!";
+
+"empty_message_title"="Empty Message";
+"empty_message_info_text"="You cannot send an empty message. Please type a message to send";
+"modify_push_setting_title"="Modify Push Setting";
+"modify_push_setting_info_text"="To be notified of responses even when out of this chat, enable push notifications for this app via the Settings->Notification Center";
+"message_unsent_title"="Message not sent";
+"message_unsent_info_text"="We could not send your message(s) at this time. Check your internet or try later.";
+
+/* Posting audio message alerts */
+"short_audio_alert_title" = "Message too short";
+"short_audio_alert_description_text" = "The audio recording is too short. Please try again";
+"long_audio_alert_title" = "Was it intentional?";
+"long_audio_alert_description_text" = "The message you are trying to send is more than 2 minutes, Are you sure you want to send?";
+"long_audio_alert_post_button_text" = "Send it";
+
+/* Search View Place Holder */
+"search_placeholder_text"="Search for FAQs";
+"search_empty_result_text"="Whoops! we couldn't found what you are looking for.";
+"empty_channel_text" = "No Channels are available";
+"empty_faq_text" = "No FAQs are available";
+
+/* Camera Unavailable alert */
+"camera_unavailable_title"="Camera Unavailable";
+"camera_unavailable_description"="Sorry! Your device doesn't have a camera, or the camera is not available for use.";
+"camera_unavailable_ok_button_text"="OK";
+"camera_permission_denied" ="Permission missing. Please enable Camera permission under Settings.";
+
+/*Image Attachment*/
+"image_attachment_cancel_button_text"="Cancel";
+"image_attachment_select_existing_image"="Select Existing Image";
+"image_attachment_select_new_image"="New Image via Camera";
+
+/*days*/
+"day_sunday"="Sunday";
+"day_monday"="Monday";
+"day_tuesday"="Tuesday";
+"day_wednesday"="Wednesday";
+"day_thursday"="Thursday";
+"day_friday"="Friday";
+"day_saturday"="Saturday";
+
+/*Notifications*/
+"notification_message_default"="Hey, you have a new message";
