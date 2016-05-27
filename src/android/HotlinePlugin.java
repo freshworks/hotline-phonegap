@@ -57,7 +57,7 @@ public class HotlinePlugin extends CordovaPlugin {
             if (apiAvailability.isUserResolvableError(resultCode)) {
                 apiAvailability.getErrorDialog(cordova.getActivity(), resultCode, PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
-                Log.i(LOG_TAG, "Play Services not available on this device"); 
+                Log.e(LOG_TAG, "Play Services not available on this device"); 
             }
             return false;
         }
@@ -66,6 +66,9 @@ public class HotlinePlugin extends CordovaPlugin {
 
     public Bundle jsonToBundle(JSONObject jsonObject) throws JSONException {
         Bundle bundle = new Bundle();
+        if(jsonObject == null) {
+            return bundle;
+        }
         Iterator iterator = jsonObject.keys();
         while(iterator.hasNext()){
             String key = (String)iterator.next();
@@ -80,8 +83,12 @@ public class HotlinePlugin extends CordovaPlugin {
         
         
         if(action.equals("init")) {
+            if(args.length() == 0) {
+                Log.e(LOG_TAG,"Please provide parameters for initializing Hotline");
+                return false;
+            }
             JSONObject initArgs = new JSONObject(args.getString(0));
-            Log.i(LOG_TAG,"inside init call");
+            Log.d(LOG_TAG,"inside init call");
             String appId = initArgs.getString("appId");
             String appKey = initArgs.getString("appKey");
             
@@ -108,7 +115,7 @@ public class HotlinePlugin extends CordovaPlugin {
         }
         
         if(action.equals("showFAQs")) {
-            Log.i(LOG_TAG,"Show FAQs has been called");
+            Log.d(LOG_TAG,"Show FAQs has been called");
             Hotline.showFAQs(cordovaContext);
             
             callbackContext.success();
@@ -116,7 +123,7 @@ public class HotlinePlugin extends CordovaPlugin {
         }
 
         if(action.equals("showConversations")) {
-            Log.i(LOG_TAG,"show Conversations has been called");
+            Log.d(LOG_TAG,"show Conversations has been called");
             Hotline.showConversations(cordovaContext);
             
             callbackContext.success();
@@ -124,7 +131,7 @@ public class HotlinePlugin extends CordovaPlugin {
         }
 
         if(action.equals("clearUserData")) {   
-            Log.i(LOG_TAG,"inside clearUserData");
+            Log.d(LOG_TAG,"inside clearUserData");
             Hotline.clearUserData(cordovaContext);
             
             callbackContext.success();
@@ -132,8 +139,12 @@ public class HotlinePlugin extends CordovaPlugin {
         }
 
         if(action.equals("updateUser")) {
+            if(args.length() == 0) {
+                Log.e(LOG_TAG,"Please provide parameters to update a user");
+                return false;
+            }
             JSONObject jsonArgs = new JSONObject(args.getString(0));
-            Log.i(LOG_TAG,"inside updateUser");
+            Log.d(LOG_TAG,"inside updateUser");
             
             HotlineUser hotlineUser=Hotline.getInstance(cordovaContext).getUser();
            
@@ -157,14 +168,18 @@ public class HotlinePlugin extends CordovaPlugin {
         }
 
         if(action.equals("updateUserProperties")) {
+            if(args.length() == 0) {
+                Log.e(LOG_TAG,"Please provide user properties to update the user");
+                return false;
+            }
             JSONObject metadata = new JSONObject(args.getString(0));
-            Log.i(LOG_TAG,"inside updateUserMeta");
+            Log.d(LOG_TAG,"inside updateUserMeta");
 
             Map<String, String> userMeta = new HashMap<String, String>();
             Iterator<String> keys  = metadata.keys();
             while(keys.hasNext()) {
                 String key = keys.next();
-                Log.i(LOG_TAG,"the key:"+key+"value:"+metadata.getString(key));
+                Log.d(LOG_TAG,"the key:"+key+"value:"+metadata.getString(key));
                 userMeta.put(key, metadata.getString(key));
             }
             Hotline.getInstance(cordovaContext).updateUserProperties(userMeta);
@@ -190,10 +205,16 @@ public class HotlinePlugin extends CordovaPlugin {
         }
 
         if(action.equals("registerPushNotification")) {
-            Log.i(LOG_TAG,"inside Android Notification Registeration");
             
+            if(args.length() == 0) {
+                Log.e(LOG_TAG,"Please provide the sender Id to register for push notification");
+                return false;
+            }
+            String senderId = args.getString(0);
+            Log.i(LOG_TAG,"inside Android Notification Registeration with sender Id: " + senderId);
             if(checkPlayServices()) {
-                Intent intent = new Intent(cordovaContext, MyGcmRegistrationService.class);
+                Intent intent = new Intent(cordovaContext, HotlineGcmRegistrationService.class);
+                intent.putExtra("id", senderId);
                 cordovaContext.startService(intent);
                 return true;
             }
@@ -201,14 +222,18 @@ public class HotlinePlugin extends CordovaPlugin {
         }
 
         if(action.equals("getVersionName")) {
-            Log.i(LOG_TAG,"version number called");
+            Log.d(LOG_TAG,"version number called");
             int versionNumber = Hotline.getInstance(cordovaContext).getSDKVersionCode();
             callbackContext.success(versionNumber);
             return true;  
         } 
 
         if(action.equals("isHotlinePushNotificationInternal")) {
-            Log.i(LOG_TAG,"check if a particular push notificaiton is a hotline push notification or not");
+            Log.d(LOG_TAG,"check if a particular push notificaiton is a hotline push notification or not");
+            if(args.length() == 0) {
+                Log.e(LOG_TAG,"Please provide the notification payload to be verified ");
+                return false;
+            }
             JSONObject jsonArgs = new JSONObject(args.getString(0));
             Bundle bundle = jsonToBundle(jsonArgs);
             if(Hotline.getInstance(cordovaContext).isHotlineNotification(bundle)) {
@@ -221,7 +246,11 @@ public class HotlinePlugin extends CordovaPlugin {
         }
 
         if(action.equals("handlePushNotification")) {
-            Log.i(LOG_TAG,"Handling Push Notification!");
+            Log.d(LOG_TAG,"Handling Push Notification!");
+            if(args.length() == 0) {
+                Log.e(LOG_TAG,"Please provide parameters for initializing Hotline");
+                return false;
+            }
             JSONObject jsonArgs = new JSONObject(args.getString(0));
             Bundle bundle = jsonToBundle(jsonArgs);
             Hotline.getInstance(cordovaContext).handleGcmMessage(bundle);
@@ -229,13 +258,17 @@ public class HotlinePlugin extends CordovaPlugin {
         }
 
         if(action.equals("updateRegistrationToken")) {
+            if(args.length() == 0) {
+                Log.e(LOG_TAG,"Please provide the token to register");
+                return false;
+            }
             String token = args.getString(0);
             Log.i(LOG_TAG,"update GCM registration has been called");
             Hotline.getInstance(cordovaContext).updateGcmRegistrationToken(token);
             return true;
         }
 
-        Log.i(LOG_TAG,"action does not have a function to match it:"+action);
+        Log.d(LOG_TAG,"action does not have a function to match it:"+action);
         return true;
     }
 

@@ -39,7 +39,6 @@ var Hotline = {}
 Hotline.init = function(args) {
     args = args || {};
     
-    console.log("inside init");
     //Assign default values
     var configDefaults = {
         agentAvatarEnabled      : false,
@@ -59,21 +58,8 @@ Hotline.init = function(args) {
 Hotline.isHotlinePushNotification = function(cb, args){
     
     Hotline.isHotlinePushNotificationInternal(function(success, isHotline){
-        if( isHotline === 1){
-            cb(true);
-        }
-        else {
-            cb(false);
-        }
+        cb(success, isHotline === 1 );
     }, args);
-}
-
-var createEnum = function(constants) {  
-    var Enum = {};
-    constants.forEach(function(constant) {
-        Enum[constant] = constant;
-    })
-    return Enum;
 }
 
 //Add Wrapper functions to Hotline
@@ -95,12 +81,4 @@ functionList.forEach(function(funcName) {
     Hotline[funcName] = createWrapperForNativeFunction(funcName);
 });
 
-
-Hotline.HotlineCallbackStatus = createEnum([
-	"STATUS_INVALID_APP",
-	"STATUS_NO_NETWORK_CONNECTION",
-	"STATUS_NO_TICKETS_CREATED",
-	"STATUS_SUCCESS",
-	"STATUS_UNKNOWN"
-]);
 module.exports = Hotline;

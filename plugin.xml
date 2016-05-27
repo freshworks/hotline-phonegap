@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns       =   "http://www.phonegap.com/ns/plugins/1.0"
         id          =   "cordova-plugin-freshdesk-hotline"
-        version     =   "0.1.0">
+        version     =   "0.2.0">
 
 
     <!-- Meta -->
@@ -28,9 +28,9 @@
         
         <!-- Move the Java wrapper class to specified location(which corresponds with the Class's pakage name) -->
         <source-file src="src/android/HotlinePlugin.java" target-dir="src/com/freshdesk/hotline/android" />
-        <source-file src="src/android/MyGcmListenerService.java" target-dir="src/com/freshdesk/hotline/android" />
-        <source-file src="src/android/MyGcmRegistrationService.java" target-dir="src/com/freshdesk/hotline/android" />
-        <source-file src="src/android/MyInstanceIDListenerService.java" target-dir="src/com/freshdesk/hotline/android" />
+        <source-file src="src/android/HotlineGcmListenerService.java" target-dir="src/com/freshdesk/hotline/android" />
+        <source-file src="src/android/HotlineGcmRegistrationService.java" target-dir="src/com/freshdesk/hotline/android" />
+        <source-file src="src/android/HotlineInstanceIDListenerService.java" target-dir="src/com/freshdesk/hotline/android" />
         <framework src="com.google.android.gms:play-services-gcm:8.+" />
         <!-- Pushing <feature> tag into android platform's config.xml -->
         <!-- This is needed for Cordova to recognize the plugin and for using the Java Class globally -->
@@ -49,7 +49,7 @@
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <!-- GCM Listener Service -->
             <service
-                android:name="com.freshdesk.hotline.android.MyGcmListenerService"
+                android:name="com.freshdesk.hotline.android.HotlineGcmListenerService"
                 android:exported="false" >
                 <intent-filter>
                     <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -71,7 +71,7 @@
  
             <!-- InstanceIDListenerService -->
             <service
-                android:name="com.freshdesk.hotline.android.MyInstanceIDListenerService"
+                android:name="com.freshdesk.hotline.android.HotlineInstanceIDListenerService"
                 android:exported="false">
                     <intent-filter>
                         <action android:name="com.google.android.gms.iid.InstanceID"/>
@@ -79,7 +79,7 @@
             </service>
  
             <service
-                android:name="com.freshdesk.hotline.android.MyGcmRegistrationService"
+                android:name="com.freshdesk.hotline.android.HotlineGcmRegistrationService"
                 android:exported="false" />
             
         </config-file>
