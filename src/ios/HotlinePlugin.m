@@ -20,7 +20,7 @@
 }
 
 -(void) callbackToJavascriptWithoutResultForCommand:(CDVInvokedUrlCommand*)command {
-    CDVPluginResult* emptyResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    CDVPluginResult* emptyResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     [self callbackToJavascriptWithResult:emptyResult ForCommand:command];
 }
 
@@ -31,8 +31,12 @@
 
 -(void) init:(CDVInvokedUrlCommand*)command {
     NSArray* arguments = [command arguments];
-    NSDictionary* initParams = [arguments firstObject];
-    NSLog(@"Inside init function");
+    NSDictionary* initParams;
+    if(arguments != nil && arguments.count > 0) {
+        initParams = [arguments firstObject];
+    } else {
+        [self callbackToJavascriptWithoutResultForCommand:command];
+    }
     NSString* domain = [initParams objectForKey:@"domain"];
     NSString* appId = [initParams objectForKey:@"appId"];
     NSString* appKey = [initParams objectForKey:@"appKey"];
@@ -80,12 +84,10 @@
 }
 
 - (void) showConversations :(CDVInvokedUrlCommand*)command {
-    NSLog(@"Inside show conversations");
     [[Hotline sharedInstance] showConversations:[self viewController]];
 }
 
 - (void) showFAQs :(CDVInvokedUrlCommand*)command {
-    NSLog(@"Show FAQs has been called");
     [[Hotline sharedInstance] showFAQs:[self viewController]];
 }
 
@@ -102,9 +104,13 @@
 
 - (void) updateUser :(CDVInvokedUrlCommand*)command {
     NSArray* arguments = [command arguments];
-    NSDictionary* args = [arguments firstObject];
+    NSDictionary* args;
+    if(arguments != nil && arguments.count > 0) {
+        args = [arguments firstObject];
+    } else {
+        [self callbackToJavascriptWithoutResultForCommand:command];
+    }
     HotlineUser *user = [HotlineUser sharedInstance];
-   
 
     if([args objectForKey:@"name"] != nil) {
         user.name = [args objectForKey:@"name"];
@@ -129,8 +135,10 @@
 
     NSArray* arguments = [command arguments];
     NSDictionary* args;
-    if([arguments firstObject] != nil) {
-        NSDictionary* args = [arguments firstObject];
+    if(arguments != nil && arguments.count > 0) {
+        args = [arguments firstObject];
+    } else {
+        [self callbackToJavascriptWithoutResultForCommand:command];
     }
     
     NSArray *arrayOfKeys = [args allKeys];
@@ -148,7 +156,7 @@
 }
 
 - (void) registerPushNotification : (CDVInvokedUrlCommand*)command{
-    NSLog(@"Notification Registeration has been called");
+    NSLog(@"Notification is being registered");
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
@@ -158,12 +166,20 @@
 }
 
 - (void) getVersionName :(CDVInvokedUrlCommand*)command {
-    NSLog(@"Hotline version: %@", [Hotline SDKVersion]);
+    NSInteger versionNumber = [Hotline SDKVersion];
+    NSLog(@"Hotline version: %@", versionNumber);
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:(int)versionNumber];
+    [self callbackToJavascriptWithResult:result ForCommand:command];
 }
 
 - (void) updateRegistrationToken :(CDVInvokedUrlCommand*)command {
     NSArray* arguments = [command arguments];
-    NSData* devToken = [arguments firstObject];
+    NSData* devToken;
+    if(arguments != nil && arguments.count > 0) {
+        devToken = [arguments firstObject];
+    } else {
+        [self callbackToJavascriptWithoutResultForCommand:command];
+    }
     NSLog(@"Registration token value: %@", devToken);
     [[Hotline sharedInstance] updateDeviceToken:devToken];
     NSLog(@"Registration token has been updated");
@@ -171,7 +187,12 @@
 
 - (void) isHotlinePushNotificationInternal :(CDVInvokedUrlCommand*)command {
     NSArray* arguments = [command arguments];
-    NSDictionary* info = [arguments firstObject];
+    NSDictionary* info;
+    if(arguments != nil && arguments.count > 0) {
+        info = [arguments firstObject];
+    } else {
+       [self callbackToJavascriptWithoutResultForCommand:command];
+    }
     if ([[Hotline sharedInstance]isHotlineNotification:info]) {
         NSLog(@"It is a hotline notification");
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:(int)1];
@@ -180,7 +201,7 @@
 }
 
 - (void) handlePushNotification : (CDVInvokedUrlCommand*)command {
-    NSLog(@"Inside Handle Push notification iOS");
+    NSLog(@"Received a hotline push notification");
     NSArray* arguments = [command arguments];
     NSDictionary* info = [arguments firstObject];
     [[Hotline sharedInstance]handleRemoteNotification:info andAppstate:[UIApplication sharedApplication].applicationState];

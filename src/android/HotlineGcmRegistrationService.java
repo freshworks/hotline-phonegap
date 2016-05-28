@@ -9,13 +9,11 @@ import com.freshdesk.hotline.Hotline;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
-public class MyGcmRegistrationService extends IntentService {
+public class HotlineGcmRegistrationService extends IntentService {
 
 	private static final String TAG = "MyGcmRegService";
-    
-	private static final String ANDROID_PROJECT_SENDER_ID = "20738924380";
 
-	public MyGcmRegistrationService() {
+	public HotlineGcmRegistrationService() {
 		super(TAG);
 	}
 
@@ -23,11 +21,16 @@ public class MyGcmRegistrationService extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 		try {
 			// Initially this call goes out to the network to retrieve the token, subsequent calls are local.
+            String senderId = intent.getStringExtra("id");
             Log.i("test","this is handle intent");
 			InstanceID instanceID = InstanceID.getInstance(this);
-			String token = instanceID.getToken(ANDROID_PROJECT_SENDER_ID, GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-			
-			sendRegistrationToServer(this, token);
+            if(senderId != null && !senderId.isEmpty()) {
+                String token = instanceID.getToken(senderId, GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+                sendRegistrationToServer(this, token);
+            }
+			else {
+                Log.i(TAG,"Please provide a valid GCM sender Id");
+            }			
 		} catch (Exception e) {
 			Log.d(TAG, "Failed to complete token refresh", e);
 			// If an exception happens while fetching the new token or updating our registration data
