@@ -43,6 +43,9 @@ public class HotlinePlugin extends CordovaPlugin {
     private Context cordovaContext;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 3458;
     private static final String LOG_TAG = "Hotline";
+    private HotlineUser hotlineUser;
+    private Map<String, String> userMeta;
+    private Bundle bundle;
     
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -92,7 +95,7 @@ public class HotlinePlugin extends CordovaPlugin {
             String appId = initArgs.getString("appId");
             String appKey = initArgs.getString("appKey");
             
-            HotlineConfig hotlineConfig = new HotlineConfig(appId,appKey);
+            hotlineConfig = new HotlineConfig(appId,appKey);
             
             if(initArgs.getString("domain") != null) {
                 hotlineConfig.setDomain(initArgs.getString("domain"));
@@ -103,37 +106,36 @@ public class HotlinePlugin extends CordovaPlugin {
             hotlineConfig.setPictureMessagingEnabled(initArgs.getBoolean("pictureMessagingEnabled")); 
 
             //option to show FAQ as grid vs list 
-            
-            
-            Hotline.getInstance(cordovaContext).init(hotlineConfig);
-            
+            cordova.getThreadPool().execute( new Runnable() {
+               public void run() {
+                    Hotline.getInstance(cordovaContext).init(hotlineConfig);       
+                    callbackContext.success();
+               } 
+            });
+
             this.isInitialized = true;
             this.hotlineConfig = hotlineConfig;
-            
-            callbackContext.success();
+
             return true;
         }
         
         if(action.equals("showFAQs")) {
             Log.d(LOG_TAG,"Show FAQs has been called");
-            Hotline.showFAQs(cordovaContext);
-            
+            Hotline.showFAQs(cordovaContext);      
             callbackContext.success();
             return true;
         }
 
         if(action.equals("showConversations")) {
             Log.d(LOG_TAG,"show Conversations has been called");
-            Hotline.showConversations(cordovaContext);
-            
+            Hotline.showConversations(cordovaContext);      
             callbackContext.success();
             return true;
         }
 
         if(action.equals("clearUserData")) {   
             Log.d(LOG_TAG,"inside clearUserData");
-            Hotline.clearUserData(cordovaContext);
-            
+            Hotline.clearUserData(cordovaContext);      
             callbackContext.success();
             return true;
         }
@@ -146,7 +148,7 @@ public class HotlinePlugin extends CordovaPlugin {
             JSONObject jsonArgs = new JSONObject(args.getString(0));
             Log.d(LOG_TAG,"inside updateUser");
             
-            HotlineUser hotlineUser=Hotline.getInstance(cordovaContext).getUser();
+            hotlineUser=Hotline.getInstance(cordovaContext).getUser();
            
             if(jsonArgs.getString("name") != null) {
                 hotlineUser.setName(jsonArgs.getString("name"));    
@@ -161,9 +163,12 @@ public class HotlinePlugin extends CordovaPlugin {
                 hotlineUser.setPhone(jsonArgs.getString("countryCode"),jsonArgs.getString("phoneNumber"));
             }
 
-            Hotline.getInstance(cordovaContext).updateUser(hotlineUser);
-
-            callbackContext.success();
+            cordova.getThreadPool().execute( new Runnable() {
+               public void run() {
+                    Hotline.getInstance(cordovaContext).updateUser(hotlineUser);
+                    callbackContext.success();
+               } 
+            });
             return true;
         }
 
@@ -175,16 +180,20 @@ public class HotlinePlugin extends CordovaPlugin {
             JSONObject metadata = new JSONObject(args.getString(0));
             Log.d(LOG_TAG,"inside updateUserMeta");
 
-            Map<String, String> userMeta = new HashMap<String, String>();
-            Iterator<String> keys  = metadata.keys();
-            while(keys.hasNext()) {
-                String key = keys.next();
-                Log.d(LOG_TAG,"the key:"+key+"value:"+metadata.getString(key));
-                userMeta.put(key, metadata.getString(key));
-            }
-            Hotline.getInstance(cordovaContext).updateUserProperties(userMeta);
+            cordova.getThreadPool().execute( new Runnable() {
+               public void run() {
+                    userMeta = new HashMap<String, String>();
+                    Iterator<String> keys  = metadata.keys();
+                    while(keys.hasNext()) {
+                        String key = keys.next();
+                        Log.d(LOG_TAG,"the key:"+key+"value:"+metadata.getString(key));
+                        userMeta.put(key, metadata.getString(key));
+                    }
             
-            callbackContext.success();
+                    Hotline.getInstance(cordovaContext).updateUserProperties(userMeta);
+                    callbackContext.success();
+               } 
+            });
             return true;
         }
 
@@ -252,8 +261,14 @@ public class HotlinePlugin extends CordovaPlugin {
                 return false;
             }
             JSONObject jsonArgs = new JSONObject(args.getString(0));
-            Bundle bundle = jsonToBundle(jsonArgs);
-            Hotline.getInstance(cordovaContext).handleGcmMessage(bundle);
+            bundle = jsonToBundle(jsonArgs);
+            cordova.getThreadPool().execute( new Runnable() {
+               public void run() {
+                    Hotline.getInstance(cordovaContext).handleGcmMessage(bundle);
+                    callbackContext.success();
+               } 
+            });
+            
             return true;
         }
 

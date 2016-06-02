@@ -79,7 +79,6 @@
     if(notificationAsBanner) {
         config.showNotificationBanner = notificationAsBanner;
     }
-
     [[Hotline sharedInstance] initWithConfig:config];
 }
 
@@ -92,7 +91,9 @@
 }
 
 - (void) clearUserData : (CDVInvokedUrlCommand*)command {
-    [[Hotline sharedInstance]clearUserDataWithCompletion:nil];
+    [self.commandDelegate runInBackground:^{
+        [[Hotline sharedInstance]clearUserDataWithCompletion:nil];
+    }];
 }
 
 - (void) unreadCount :(CDVInvokedUrlCommand*)command {
@@ -127,8 +128,9 @@
     if([args objectForKey:@"externalId"] != nil) {
         user.name = [args objectForKey:@"externalId"];
     }   
-    
-    [[Hotline sharedInstance] updateUser:user];
+    [self.commandDelegate runInBackground:^{
+        [[Hotline sharedInstance] updateUser:user];
+    }];
 }
 
 - (void) updateUserProperties :(CDVInvokedUrlCommand*)command {
@@ -147,12 +149,12 @@
     NSString *key;
     NSString *value;
     
-    for(int i=0; i<arrayOfKeys.count; i++) {
-        key = [arrayOfKeys objectAtIndex:i];
-        value = [arrayOfValues objectAtIndex:i];
-        NSLog(@" The userMeta key is: %@ value is: %@", key,value);
-        [[Hotline sharedInstance] updateUserPropertyforKey:key withValue:value];
-    }
+        for(int i=0; i<arrayOfKeys.count; i++) {
+            key = [arrayOfKeys objectAtIndex:i];
+            value = [arrayOfValues objectAtIndex:i];
+            NSLog(@" The userMeta key is: %@ value is: %@", key,value);
+            [[Hotline sharedInstance] updateUserPropertyforKey:key withValue:value];
+        }
 }
 
 - (void) registerPushNotification : (CDVInvokedUrlCommand*)command{
@@ -181,7 +183,9 @@
         [self callbackToJavascriptWithoutResultForCommand:command];
     }
     NSLog(@"Registration token value: %@", devToken);
-    [[Hotline sharedInstance] updateDeviceToken:devToken];
+    [self.commandDelegate runInBackground:^{
+        [[Hotline sharedInstance] updateDeviceToken:devToken];
+    }];
     NSLog(@"Registration token has been updated");
 }
 
@@ -204,6 +208,8 @@
     NSLog(@"Received a hotline push notification");
     NSArray* arguments = [command arguments];
     NSDictionary* info = [arguments firstObject];
-    [[Hotline sharedInstance]handleRemoteNotification:info andAppstate:[UIApplication sharedApplication].applicationState];
+    [self.commandDelegate runInBackground:^{
+        [[Hotline sharedInstance]handleRemoteNotification:info andAppstate:[UIApplication sharedApplication].applicationState];
+    }];
 }
 @end
