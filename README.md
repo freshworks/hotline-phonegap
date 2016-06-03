@@ -30,10 +30,22 @@ _Hotline.init_ needs to be called from _ondeviceready_ event listenter to make s
 
 ```javascript
 document.addEventListener("deviceready", function(){
-  //Initialize Hotline
+  // Initialize Hotline with your AppId & AppKey from your portal https://web.hotline.io/settings/apisdk
   window.Hotline.init({
     appId       : "<Your App Id>",
     appKey      : "<Your App Key>"
+  });
+});
+ ```
+ 
+ If you have are a konotor user add a key called "domain" and "app.konotor.com". so your init code would look like this:
+ ```javascript
+document.addEventListener("deviceready", function(){
+  //Initialize Hotline
+  window.Hotline.init({
+    appId       : "<Your App Id>",
+    appKey      : "<Your App Key>",
+    domain      : "app.konotor.com"
   });
 });
  ```

@@ -46,7 +46,8 @@ Hotline.init = function(args) {
         voiceMessagingEnabled   : false,
         pictureMessagingEnabled : true,
         displayFAQsAsGrid       : true,
-        showNotificationBanner  : true
+        showNotificationBanner  : true,
+        domain                  : "app.hotline.io"
     };
     for (k in configDefaults)
         args[k] = args[k] || configDefaults[k];
