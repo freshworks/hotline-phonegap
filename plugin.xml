@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns       =   "http://www.phonegap.com/ns/plugins/1.0"
         id          =   "cordova-plugin-hotline"
-        version     =   "0.4.1">
+        version     =   "0.5.0">
 
 
     <!-- Meta -->
@@ -113,7 +113,7 @@
         <!-- Resources -->
         <resource-file src="src/ios/HotlineSDK/KonotorModels.bundle" target-dir="HotlineiOSPlugin"/>
         <resource-file src="src/ios/HotlineSDK/HLResources.bundle" target-dir="HotlineiOSPlugin"/>
-        <resource-file src="src/ios/HotlineSDK/HLLocalization/en.lproj/HLLocalizable.strings" target-dir="HotlineiOSPlugin/HLLocalization/en.lproj"/>
+        <resource-file src="src/ios/HotlineSDK/HLLocalization.bundle" target-dir="HotlineiOSPlugin"/>
 
         <framework src="Foundation.framework"/>
         <framework src="AVFoundation.framework"/>

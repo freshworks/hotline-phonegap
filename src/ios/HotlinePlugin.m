@@ -169,7 +169,7 @@
 
 - (void) getVersionName :(CDVInvokedUrlCommand*)command {
     NSInteger versionNumber = [Hotline SDKVersion];
-    NSLog(@"Hotline version: %@", versionNumber);
+    NSLog(@"Hotline version: %ld", versionNumber);
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:(int)versionNumber];
     [self callbackToJavascriptWithResult:result ForCommand:command];
 }

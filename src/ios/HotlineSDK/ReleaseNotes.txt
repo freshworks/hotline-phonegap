@@ -2,7 +2,18 @@ Hotline iOS SDK - Powered by Freshdesk
 
 Documentation   : https://hotline.freshdesk.com/support/solutions
 Support Email   : support@hotline.io 
-Version         : 1.0.13
+Version         : 1.1.0
+
+Ver 1.1.0 
+__________________________
+The SDK is now i18n ready. All the strings can be overriden and localized to your language of choice.
+Perfromance improvements in saving FAQs, indexing for search is now faster.
+SDK footprint is reduced even further.
+IPv6 Compatibility as mandated by Apple -> https://developer.apple.com/news/?id=05042016a
+Support for Cross linking FAQs. You can link to another article with "faq://<articleid>" from within an article.
+New API for sending a customizable message on behalf of the user to a particular channel 
+Removed Dependency on AdSupport.framework
+UI Improvements
 
 Ver 1.0.13 
 __________________________

@@ -36,7 +36,7 @@ document.addEventListener("deviceready", function(){
     appKey      : "<Your App Key>"
   });
 });
- ```
+```
  
  If you have are a konotor user add a key called "domain" and "app.konotor.com". so your init code would look like this:
  ```javascript
@@ -56,6 +56,19 @@ document.addEventListener("deviceready", function(){
  -  voiceMessagingEnabled 
  -  pictureMessagingEnabled
  -  showNotificationBanner _(ios only)_
+ 
+ Here is a sample init code with the optional parameters
+ 
+ ```javascript
+ window.Hotline.init({
+            appId       : "<Your App Id>",
+            appKey      : "<Your App Key>",
+            agentAvatarEnabled      : true,
+            cameraCaptureEnabled    : false,
+            voiceMessagingEnabled   : true,
+            pictureMessagingEnabled : true
+        });
+ ```
  
  Once initialized you can call Hotline APIs using the window.Hotline object. 
  
@@ -80,7 +93,7 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
     - Fetch count of unread messages from agents. 
 * Hotline.updateUser(userInfo)
     - Update user info. Accepts a JSON with the following format  
-    - ```
+```javascript
 { 
    "name" : "John Doe", 
    "email" : "johndoe@dead.man", 

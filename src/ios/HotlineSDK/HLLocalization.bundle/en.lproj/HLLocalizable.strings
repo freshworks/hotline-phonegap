@@ -22,6 +22,9 @@
 /* Article Detail */
 "offline_missing_content_text"="Please connect to the internet to view media content available on this article.";
 
+/* No Internet Connectivity */
+"offline_internet_message"="No content available. Please check your internet connection";
+
 /*Channels*/
 "channels_title_text"="Talk to us";
 "channels_close_button_text"="Close";
@@ -42,7 +45,7 @@
 "audio_recording_stopped"="Recording Stopped";
 "audio_recording_permission_denied"="Permission missing. Please enable Microphone permission under Settings.";
 
-"cancel_audio_recording_alert"="Are you sure you want to cancel recording!";
+"cancel_audio_recording_alert"="Are you sure you want to cancel recording?";
 
 "empty_message_title"="Empty Message";
 "empty_message_info_text"="You cannot send an empty message. Please type a message to send";
@@ -55,12 +58,12 @@
 "short_audio_alert_title" = "Message too short";
 "short_audio_alert_description_text" = "The audio recording is too short. Please try again";
 "long_audio_alert_title" = "Was it intentional?";
-"long_audio_alert_description_text" = "The message you are trying to send is more than 2 minutes, Are you sure you want to send?";
+"long_audio_alert_description_text" = "The message you are trying to send is more than 2 mins long. Are you sure you want to send?";
 "long_audio_alert_post_button_text" = "Send it";
 
 /* Search View Place Holder */
 "search_placeholder_text"="Search for FAQs";
-"search_empty_result_text"="Whoops! we couldn't found what you are looking for.";
+"search_empty_result_text"="Whoops! We couldn't find what you were looking for.";
 "empty_channel_text" = "No Channels are available";
 "empty_faq_text" = "No FAQs are available";
 
