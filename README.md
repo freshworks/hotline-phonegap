@@ -69,6 +69,20 @@ document.addEventListener("deviceready", function(){
             pictureMessagingEnabled : true
         });
  ```
+ The init function is also a callback function and can be implemented like so:
+ 
+ ```javascript
+ window.Hotline.init({
+            appId       : "<Your App Id>",
+            appKey      : "<Your App Key>",
+            agentAvatarEnabled      : true,
+            cameraCaptureEnabled    : false,
+            voiceMessagingEnabled   : true,
+            pictureMessagingEnabled : true
+        }, function(success){
+            console.log("This is called form the init callback");
+        });
+ ```
  
  Once initialized you can call Hotline APIs using the window.Hotline object. 
  
@@ -140,11 +154,11 @@ Whenever a push notification is received. You will need to check if the notifica
 ```
     // Example illustrates usage for phonegap-push-plugin
     push.on('notification',function(data) {
-        window.Hotline.isHotlineNotificationFunction(data.additionalData, function(success, isHotlineNotif) {
+        window.Hotline.isHotlineNotificationFunction(function(success, isHotlineNotif) {
           if( success && isHotlineNotif ) { 
             window.Hotline.handlePush(data.additionalData);
           }
-});
+}, data.additionalData);
     });
 ```
 

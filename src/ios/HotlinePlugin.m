@@ -80,6 +80,7 @@
         config.showNotificationBanner = notificationAsBanner;
     }
     [[Hotline sharedInstance] initWithConfig:config];
+    [self callbackToJavascriptWithoutResultForCommand:command];
 }
 
 - (void) showConversations :(CDVInvokedUrlCommand*)command {

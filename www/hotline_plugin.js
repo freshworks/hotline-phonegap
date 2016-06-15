@@ -22,22 +22,26 @@ var createWrapperForNativeFunction = function(functionName) {
         // have a dummy callback
         // Set the callback function to be called on success and failure
         var userCallback;
-        if (typeof argumentsArray[0] == 'function')
-            userCallback = argumentsArray.splice(0,1)[0];    //remove first param and store it in userCallback
+        var size = argumentsArray.length - 1;
+        
+        if (size > 0 && typeof argumentsArray[size] == 'function')
+            userCallback = argumentsArray.splice(size,1)[0];    //remove the last param and store it in userCallback
         else
             userCallback = function() {}
         success = function(e) { userCallback(true,e);   }
         failure = function(e) { userCallback(false,e);  }
-        
+
         //Call corresponding native function
-		return cordova.exec(success,failure,"HotlinePlugin",functionName,argumentsArray);
+        return cordova.exec(success,failure,"HotlinePlugin",functionName,argumentsArray);    
+        
     }
 }
 
 var Hotline = {}
 
-Hotline.init = function(args) {
+Hotline.init = function(args, cb) {
     args = args || {};
+    cb = cb || function() {};
     
     //Assign default values
     var configDefaults = {
@@ -53,14 +57,14 @@ Hotline.init = function(args) {
         args[k] = args[k] || configDefaults[k];
     
     //Call native function
-    createWrapperForNativeFunction("init")(args);
+    createWrapperForNativeFunction("init")(args, cb);
 }
 
-Hotline.isHotlinePushNotification = function(cb, args){
+Hotline.isHotlinePushNotification = function(args, cb){
     
-    Hotline.isHotlinePushNotificationInternal(function(success, isHotline){
+    Hotline.isHotlinePushNotificationInternal(args,function(success, isHotline){
         cb(success, isHotline === 1 );
-    }, args);
+    });
 }
 
 //Add Wrapper functions to Hotline
