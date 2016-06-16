@@ -24,7 +24,7 @@ var createWrapperForNativeFunction = function(functionName) {
         var userCallback;
         var size = argumentsArray.length - 1;
         
-        if (size > 0 && typeof argumentsArray[size] == 'function')
+        if (size != -1 && typeof argumentsArray[size] == 'function')
             userCallback = argumentsArray.splice(size,1)[0];    //remove the last param and store it in userCallback
         else
             userCallback = function() {}

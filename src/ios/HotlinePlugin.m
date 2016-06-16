@@ -118,16 +118,16 @@
         user.name = [args objectForKey:@"name"];
     }
     if([args objectForKey:@"email"] != nil) {
-        user.name = [args objectForKey:@"email"];
+        user.email = [args objectForKey:@"email"];
     }
     if([args objectForKey:@"countryCode"] != nil) {
-        user.name = [args objectForKey:@"countryCode"];
+        user.phoneCountryCode = [args objectForKey:@"countryCode"];
     }
     if([args objectForKey:@"phoneNumber"] != nil) {
-        user.name = [args objectForKey:@"phoneNumber"];
+        user.phoneNumber = [args objectForKey:@"phoneNumber"];
     }
     if([args objectForKey:@"externalId"] != nil) {
-        user.name = [args objectForKey:@"externalId"];
+        user.externalID = [args objectForKey:@"externalId"];
     }   
     [self.commandDelegate runInBackground:^{
         [[Hotline sharedInstance] updateUser:user];

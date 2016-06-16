@@ -154,10 +154,10 @@ public class HotlinePlugin extends CordovaPlugin {
                         hotlineUser.setName(jsonArgs.getString("name"));    
                     }
                     if(jsonArgs.getString("email") != null) {
-                        hotlineUser.setName(jsonArgs.getString("email"));    
+                        hotlineUser.setEmail(jsonArgs.getString("email"));    
                     }
                     if(jsonArgs.getString("externalId") != null) {
-                        hotlineUser.setName(jsonArgs.getString("externalId"));    
+                        hotlineUser.setExternalId(jsonArgs.getString("externalId"));    
                     }
                     if(jsonArgs.getString("countryCode") != null && jsonArgs.getString("phoneNumber") != null) {
                         hotlineUser.setPhone(jsonArgs.getString("countryCode"),jsonArgs.getString("phoneNumber"));

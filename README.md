@@ -112,7 +112,7 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
    "name" : "John Doe", 
    "email" : "johndoe@dead.man", 
    "externalId" : "some unique Identifier from your system", 
-   "phoneCountryCode" : "+91", 
+   "countryCode" : "+91", 
    "phoneNumber" : "1234234123"
 }
 ```
