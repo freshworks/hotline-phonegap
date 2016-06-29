@@ -8,11 +8,11 @@ Supported platforms :
 * Android
 * iOS
 
-**Note : This is a early version and so expect changes to the API**
+**Note : This is an early version and so expect changes to the API**
 
 ### Integrating the Plugin : 
 
-1. Add required platforms to your phonegap project 
+1. Add required platforms to your PhoneGap project 
 ```
 phonegap platform add android
 phonegap platform add ios
@@ -26,7 +26,7 @@ phonegap plugin add https://github.com/freshdesk/hotline-phonegap.git
 
 ### Initializing the plugin
 
-_Hotline.init_ needs to be called from _ondeviceready_ event listenter to make sure the SDK is initialized before use.
+_Hotline.init_ needs to be called from _ondeviceready_ event listener to make sure the SDK is initialized before use.
 
 ```javascript
 document.addEventListener("deviceready", function(){
@@ -38,7 +38,7 @@ document.addEventListener("deviceready", function(){
 });
 ```
  
- If you have are a konotor user add a key called "domain" and "app.konotor.com". so your init code would look like this:
+ If you have are a Konotor user add a key called "domain" and "app.konotor.com". so your init code would look like this:
  ```javascript
 document.addEventListener("deviceready", function(){
   //Initialize Hotline
@@ -125,7 +125,7 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
 * Hotline.clearCustomData()
     - Clear all previously added Custom Data values
 
-You can pass in a optional callback function to an API as the first parameter, which gets called when native API is completed. 
+You can pass in an optional callback function to an API as the first parameter, which gets called when native API is completed. 
 Eg. 
 ```javascript
 window.Hotline.unreadCount(function(success,val) {
@@ -167,7 +167,7 @@ Whenever a push notification is received. You will need to check if the notifica
 All you need to do is ask hotline to do the push notification registration and we will take care of everything from that point . 
 
 ```
-window.Hotline.registerPushNotification('ANDROID_SENDER_ID'); // takes care of regitration and handling of push notification on iOS and Android. 
+window.Hotline.registerPushNotification('ANDROID_SENDER_ID'); // takes care of registration and handling of push notification on iOS and Android. 
 ```
 
 #### Caveats
