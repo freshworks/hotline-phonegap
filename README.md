@@ -14,13 +14,13 @@ Supported platforms :
 
 1. Add required platforms to your PhoneGap project 
 ```
-phonegap platform add android
-phonegap platform add ios
+cordova platform add android
+cordova platform add ios
 ```
 
 2. Add the hotline plugin to your project.
 ```
-phonegap plugin add https://github.com/freshdesk/hotline-phonegap.git
+cordova plugin add https://github.com/freshdesk/hotline-phonegap.git
 ```
 
 
@@ -117,13 +117,15 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
 }
 ```
 * Hotline.updateUserProperties(userPropertiesJson)
-    - Update custom user properties using a Json containing key, value pairs
+    - Update custom user properties using a Json containing key, value pairs. A sample json follows
+```javascript
+{
+   "user_type" : "Paid",
+   "plan" : "Gold"
+}
+```
 * Hotline.clearUserData()
     - Clear user data when users logs off your app. 
-* Hotline.addCustomData(key,value[,isSensitive])
-    - Add / Update Custom data value 
-* Hotline.clearCustomData()
-    - Clear all previously added Custom Data values
 
 You can pass in an optional callback function to an API as the first parameter, which gets called when native API is completed. 
 Eg. 
