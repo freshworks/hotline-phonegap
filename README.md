@@ -127,7 +127,7 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
 * Hotline.clearUserData()
     - Clear user data when users logs off your app. 
 
-You can pass in an optional callback function to an API as the first parameter, which gets called when native API is completed. 
+You can pass in an optional callback function to an API as the last parameter, which gets called when native API is completed. 
 Eg. 
 ```javascript
 window.Hotline.unreadCount(function(success,val) {
