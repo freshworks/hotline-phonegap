@@ -1,5 +1,6 @@
 # Hotline Phonegap plugin
 [![Twitter](https://img.shields.io/badge/twitter-@GetHotline-orange.svg?style=flat)](https://twitter.com/GetHotline)
+
 This plugin integrates Hotline's SDK into a Phonegap/Cordova project. 
 
 For platform specific details please refer to the [Documentation](https://hotline.freshdesk.com/support/solutions/9000100231)
