@@ -155,14 +155,14 @@ When you receive a deviceToken from GCM or APNS , you need to update the deviceT
 Whenever a push notification is received. You will need to check if the notification originated from Hotline and have Hotline SDK handle it.
 
 ```javascript
-    // Example illustrates usage for phonegap-push-plugin
-    push.on('notification',function(data) {
-        window.Hotline.isHotlinePushNotification(function(success, isHotlineNotif) {
-          if( success && isHotlineNotif ) {
-            window.Hotline.handlePush(data.additionalData);
-          }
-}, data.additionalData);
-    });
+// Example illustrates usage for phonegap-push-plugin
+push.on('notification',function(data) {
+  window.Hotline.isHotlinePushNotification(data.additionalData, function(success, isHotlineNotif) {
+    if( success && isHotlineNotif ) {
+      window.Hotline.handlePush(data.additionalData);
+    }
+ });
+});
 ```
 
 ##### You currently do not use push notifications
