@@ -3,7 +3,7 @@
 
 This plugin integrates Hotline's SDK into a Phonegap/Cordova project.
 
-For platform specific details please refer to the [Documentation](https://hotline.freshdesk.com/support/solutions/9000100231)
+For platform specific details please refer to the [Documentation](http://support.hotline.io/support/solutions/160796)
 
 Supported platforms :
 * Android
