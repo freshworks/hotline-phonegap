@@ -5,7 +5,7 @@
 	<key>ConversationsUI</key>
 	<dict>
 		<key>ChatBubbleMessageFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>ChatBubbleMessageFontSize</key>
 		<string>14.0f</string>
 		<key>AgentMessageTextColor</key>
@@ -13,11 +13,11 @@
 		<key>UserMessageTextColor</key>
 		<string>000000</string>
 		<key>ChatBubbleTimeFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>ChatBubbleTimeFontSize</key>
 		<string>11.0f</string>
 		<key>ConversationUIFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>ActionButtonTextColor</key>
 		<string>000000</string>
 		<key>ActionButtonSelectedTextColor</key>
@@ -31,7 +31,7 @@
 		<key>InputTextFontColor</key>
 		<string>000000</string>
 		<key>InputTextFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>InputTextFontSize</key>
 		<string>14.0f</string>
 		<key>SendButtonColor</key>
@@ -41,7 +41,7 @@
 			<key>BackgroundColor</key>
 			<string>34AADC</string>
 			<key>MessageFontName</key>
-			<string>HelveticaNeue</string>
+			<string>SYS_DEFAULT_FONT_NAME</string>
 			<key>MessageFontSize</key>
 			<string>14.0f</string>
 			<key>MessageTextColor</key>
@@ -72,7 +72,7 @@
 		<key>YesButtonFontColor</key>
 		<string>FFFFFF</string>
 		<key>YesButtonFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>YesButtonFontSize</key>
 		<string>14</string>
 		<key>YesButtonBackgroundColor</key>
@@ -80,7 +80,7 @@
 		<key>NoButtonFontColor</key>
 		<string>535353</string>
 		<key>NoButtonFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>NoButtonFontSize</key>
 		<string>14</string>
 		<key>NoButtonBackgroundColor</key>
@@ -96,22 +96,24 @@
 		<key>LabelFontColor</key>
 		<string>535353</string>
 		<key>LabelFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>LabelFontSize</key>
 		<string>15</string>
 	</dict>
 	<key>Notification</key>
 	<dict>
 		<key>ChannelTitleFontName</key>
-		<string>HelveticaNeue-Bold</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>ChannelTitleFontSize</key>
 		<string>14</string>
 		<key>ChannelTitleFontColor</key>
 		<string>EFEFEF</string>
 		<key>ChannelIconBorderColor</key>
 		<string>FFFFFF</string>
+		<key>ChannelIconBackgroundColor</key>
+		<string>FFFFFF</string>
 		<key>MessageFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>MessageFontSize</key>
 		<string>14</string>
 		<key>MessageFontColor</key>
@@ -124,19 +126,19 @@
 		<key>ChannelTitleFontColor</key>
 		<string>222222</string>
 		<key>ChannelTitleFontName</key>
-		<string>HelveticaNeue-Medium</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>ChannelTitleFontSize</key>
 		<string>15.0f</string>
 		<key>ChannelDescriptionFontColor</key>
 		<string>ABABAB</string>
 		<key>ChannelDescriptionFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>ChannelDescriptionFontSize</key>
 		<string>14.0f</string>
 		<key>LastUpdatedTimeFontColor</key>
 		<string>ABABAB</string>
 		<key>LastUpdatedTimeFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>LastUpdatedTimeFontSize</key>
 		<string>12.0f</string>
 		<key>UnreadBadgeColor</key>
@@ -144,20 +146,20 @@
 		<key>UnreadBadgeTitleColor</key>
 		<string>FFFFFF</string>
 		<key>UnreadBadgeFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>UnreadBadgeFontSize</key>
 		<string>13f</string>
 		<key>ChannelIconPlaceholderBackgroundColor</key>
 		<string>555555</string>
-		<key>ChannelIconPlaceholderCharFontSize</key>
+		<key>ChannelIconPlaceholderTextFontSize</key>
 		<string>20.0f</string>
-		<key>ChannelIconPlaceholderCharFontName</key>
-		<string>HelveticaNeue</string>
+		<key>ChannelIconPlaceholderTextFontName</key>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 	</dict>
 	<key>EmptyResultView</key>
 	<dict>
 		<key>MessageFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>MessageTextColor</key>
 		<string>525454</string>
 		<key>MessageFontSize</key>
@@ -170,13 +172,13 @@
 		<key>ButtonColor</key>
 		<string>0079FF</string>
 		<key>ButtonFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>ButtonFontSize</key>
 		<string>16.0f</string>
 		<key>TitleColor</key>
 		<string>000000</string>
 		<key>TitleFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>TitleFontSize</key>
 		<string>17.0f</string>
 	</dict>
@@ -200,13 +202,13 @@
 		<key>CancelButtonColor</key>
 		<string>0079FF</string>
 		<key>CancelButtonFontName</key>
-		<string>Helvetica</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>CancelButtonFontSize</key>
 		<string>14.0f</string>
 		<key>FontColor</key>
 		<string>000000</string>
 		<key>FontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>FontSize</key>
 		<string>13.0f</string>
 		<key>InnerBackgroundColor</key>
@@ -225,13 +227,13 @@
 		<key>TitleFontColor</key>
 		<string>222222</string>
 		<key>TitleFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>TitleFontSize</key>
 		<string>14.0f</string>
 		<key>DetailFontColor</key>
 		<string>ACACAC</string>
 		<key>DetailFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>DetailFontSize</key>
 		<string>14.0f</string>
 	</dict>
@@ -240,7 +242,7 @@
 		<key>TitleFontColor</key>
 		<string>525252</string>
 		<key>TitleFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>TitleFontSize</key>
 		<string>14.0f</string>
 	</dict>
@@ -249,7 +251,7 @@
 		<key>TitleFontColor</key>
 		<string>222222</string>
 		<key>TitleFontName</key>
-		<string>HelveticaNeue</string>
+		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>TitleFontSize</key>
 		<string>14.0f</string>
 		<key>ImageViewBackgroundColor</key>

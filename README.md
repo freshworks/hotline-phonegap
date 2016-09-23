@@ -102,6 +102,30 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
 ### Hotline APIs
 * Hotline.showFAQs()
     - Launch FAQ / Self Help
+    
+    The following FAQOptions can be passed to the showFAQs() call
+        -showFaqCategoriesAsGrid
+        -showContactUsOnAppBar
+        -showContactUsOnFaqScreens
+        -showContactUsOnFaqNotHelpful
+    Here is a sample call to showFAQs() with the additional parameters:
+    ```javascript
+    window.Hotline.showFAQs( {
+        showFaqCategoriesAsGrid     :true,
+        showContactUsOnAppBar       :true,
+        showContactUsOnFaqScreens   :true,
+        showContactUsOnFaqNotHelpful:false
+    });
+    ```
+    Tags can also be passed as parameters to filer solution articles,
+    Here is a sample call to showFAQs() implementing tags.
+    
+    ```javascript
+    window.Hotline.showFAQs( {
+        tags :["sample","video"],
+        filteredViewTitle   : "Tags"
+    });
+    ```
 * Hotline.showConversations()
     - Launch Channels / Conversations.
 * Hotline.unreadCount(callback)
@@ -139,9 +163,11 @@ window.Hotline.unreadCount(function(success,val) {
 
 #### Push Notifications
 
-There are two options to integrate Push Notifications.
-
-##### You have push notification setup in your app.
+To setup push notifications we recommend using our forked version of the phonegap-plugin-push available [here] (https://github.com/freshdesk/phonegap-plugin-push) .
+It can be installed by the following command : 
+```shell
+cordova plugin add https://github.com/freshdesk/phonegap-plugin-push.git
+```
 
 When you receive a deviceToken from GCM or APNS , you need to update the deviceToken in hotline as follows
 
@@ -165,9 +191,9 @@ push.on('notification',function(data) {
 });
 ```
 
-##### You currently do not use push notifications
+##### DEPRECATED!
 
-All you need to do is ask hotline to do the push notification registration and we will take care of everything from that point .
+If you have been using the registerPushNotification call up until now, we recommend you use the method suggested above as we are removing support for it
 
 ```javascript
 window.Hotline.registerPushNotification('ANDROID_SENDER_ID'); // takes care of registration and handling of push notification on iOS and Android.

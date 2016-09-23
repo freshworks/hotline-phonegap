@@ -32,6 +32,9 @@ import android.widget.Toast;
 import com.freshdesk.hotline.*;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 
@@ -40,31 +43,18 @@ public class HotlinePlugin extends CordovaPlugin {
 
     private boolean isInitialized = false;
     private HotlineConfig hotlineConfig;
+    private FaqOptions faqOptions;
     private Context cordovaContext;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 3458;
     private static final String LOG_TAG = "Hotline";
     private HotlineUser hotlineUser;
     private Map<String, String> userMeta;
     private Bundle bundle;
-    
+
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         cordovaContext = cordova.getActivity();
-    }
-    
-    private boolean checkPlayServices() {
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int resultCode = apiAvailability.isGooglePlayServicesAvailable(cordovaContext);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (apiAvailability.isUserResolvableError(resultCode)) {
-                apiAvailability.getErrorDialog(cordova.getActivity(), resultCode, PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            } else {
-                Log.e(LOG_TAG, "Play Services not available on this device"); 
-            }
-            return false;
-        }
-        return true;
     }
 
     public Bundle jsonToBundle(JSONObject jsonObject) throws JSONException {
@@ -83,7 +73,7 @@ public class HotlinePlugin extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args,final CallbackContext callbackContext) throws JSONException {
-        
+
         try {
                 if(action.equals("init")) {
                     if(args.length() == 0) {
@@ -97,20 +87,26 @@ public class HotlinePlugin extends CordovaPlugin {
 
                     hotlineConfig = new HotlineConfig(appId,appKey);
 
-                    if(initArgs.getString("domain") != null) {
+                    if(initArgs.has("domain")) {
                         hotlineConfig.setDomain(initArgs.getString("domain"));
                     }
-                    hotlineConfig.setAgentAvatarEnabled(initArgs.getBoolean("agentAvatarEnabled"));
-                    hotlineConfig.setCameraCaptureEnabled(initArgs.getBoolean("cameraCaptureEnabled"));
-                    hotlineConfig.setVoiceMessagingEnabled(initArgs.getBoolean("voiceMessagingEnabled"));
-                    hotlineConfig.setPictureMessagingEnabled(initArgs.getBoolean("pictureMessagingEnabled")); 
-
-                    //option to show FAQ as grid vs list 
+                    if(initArgs.has("agentAvatarEnabled")) {
+                        hotlineConfig.setAgentAvatarEnabled(initArgs.getBoolean("agentAvatarEnabled"));
+                    }
+                    if(initArgs.has("cameraCaptureEnabled")) {
+                        hotlineConfig.setCameraCaptureEnabled(initArgs.getBoolean("cameraCaptureEnabled"));
+                    }
+                    if(initArgs.has("voiceMessagingEnabled")) {
+                        hotlineConfig.setVoiceMessagingEnabled(initArgs.getBoolean("voiceMessagingEnabled"));
+                    }
+                    if(initArgs.has("pictureMessagingEnabled")) {
+                        hotlineConfig.setPictureMessagingEnabled(initArgs.getBoolean("pictureMessagingEnabled"));
+                    }
                     cordova.getThreadPool().execute( new Runnable() {
                        public void run() {
-                            Hotline.getInstance(cordovaContext).init(hotlineConfig);       
+                            Hotline.getInstance(cordovaContext).init(hotlineConfig);
                             callbackContext.success();
-                       } 
+                       }
                     });
 
                     this.isInitialized = true;
@@ -121,21 +117,48 @@ public class HotlinePlugin extends CordovaPlugin {
 
                 if(action.equals("showFAQs")) {
                     Log.d(LOG_TAG,"Show FAQs has been called");
-                    Hotline.showFAQs(cordovaContext);      
+                    if(args.length() == 0) {
+                        Hotline.showFAQs(cordovaContext);
+                        return true;
+                    }
+                    JSONObject faqArgs = new JSONObject(args.getString(0));
+                    faqOptions = new FaqOptions();
+                    if(faqArgs.has("showFaqCategoriesAsGrid")) {
+                        faqOptions.showFaqCategoriesAsGrid(faqArgs.getBoolean("showFaqCategoriesAsGrid"));
+                    }
+                    if(faqArgs.has("showContactUsOnAppBar")) {
+                        faqOptions.showContactUsOnAppBar(faqArgs.getBoolean("showContactUsOnAppBar"));
+                    }
+                    if(faqArgs.has("showContactUsOnFaqScreens")) {
+                        faqOptions.showContactUsOnFaqScreens(faqArgs.getBoolean("showContactUsOnFaqScreens"));
+                    }
+                    if(faqArgs.has("showContactUsOnFaqNotHelpful")) {
+                        faqOptions.showContactUsOnFaqNotHelpful(faqArgs.getBoolean("showContactUsOnFaqNotHelpful"));
+                    }
+
+                    List<String> tagsList = new ArrayList<String>();
+                    if(faqArgs.optJSONArray("tags") != null) {
+                        JSONArray tags = faqArgs.getJSONArray("tags");
+                        for (int i = 0; i < tags.length(); i++) {
+                            tagsList.add(tags.getString(i));
+                        }
+                        faqOptions.filterByTags(tagsList, faqArgs.getString("filteredViewTitle"));
+                    }
+                    Hotline.showFAQs(cordovaContext, faqOptions);
                     callbackContext.success();
                     return true;
                 }
 
                 if(action.equals("showConversations")) {
                     Log.d(LOG_TAG,"show Conversations has been called");
-                    Hotline.showConversations(cordovaContext);      
+                    Hotline.showConversations(cordovaContext);
                     callbackContext.success();
                     return true;
                 }
 
-                if(action.equals("clearUserData")) {   
+                if(action.equals("clearUserData")) {
                     Log.d(LOG_TAG,"inside clearUserData");
-                    Hotline.clearUserData(cordovaContext);      
+                    Hotline.clearUserData(cordovaContext);
                     callbackContext.success();
                     return true;
                 }
@@ -146,20 +169,19 @@ public class HotlinePlugin extends CordovaPlugin {
                         return false;
                     }
                     JSONObject jsonArgs = new JSONObject(args.getString(0));
-                    Log.d(LOG_TAG,"inside updateUser");
 
                     hotlineUser=Hotline.getInstance(cordovaContext).getUser();
 
-                    if(jsonArgs.getString("name") != null) {
-                        hotlineUser.setName(jsonArgs.getString("name"));    
+                    if(jsonArgs.has("name")) {
+                        hotlineUser.setName(jsonArgs.getString("name"));
                     }
-                    if(jsonArgs.getString("email") != null) {
-                        hotlineUser.setEmail(jsonArgs.getString("email"));    
+                    if(jsonArgs.has("email")) {
+                        hotlineUser.setEmail(jsonArgs.getString("email"));
                     }
-                    if(jsonArgs.getString("externalId") != null) {
-                        hotlineUser.setExternalId(jsonArgs.getString("externalId"));    
+                    if(jsonArgs.has("externalId")) {
+                        hotlineUser.setExternalId(jsonArgs.getString("externalId"));
                     }
-                    if(jsonArgs.getString("countryCode") != null && jsonArgs.getString("phoneNumber") != null) {
+                    if(jsonArgs.has("countryCode") && jsonArgs.has("phoneNumber")) {
                         hotlineUser.setPhone(jsonArgs.getString("countryCode"),jsonArgs.getString("phoneNumber"));
                     }
 
@@ -167,7 +189,7 @@ public class HotlinePlugin extends CordovaPlugin {
                        public void run() {
                             Hotline.getInstance(cordovaContext).updateUser(hotlineUser);
                             callbackContext.success();
-                       } 
+                       }
                     });
                     return true;
                 }
@@ -180,18 +202,16 @@ public class HotlinePlugin extends CordovaPlugin {
                         }
 
                         JSONObject metadata = new JSONObject(args.getString(0));
-                        Log.d(LOG_TAG,"inside updateUserMeta");
                         userMeta = new HashMap<String, String>();
                         Iterator<String> keys  = metadata.keys();
 
                         while(keys.hasNext()) {
                                 String key = keys.next();
-                                Log.d(LOG_TAG,"the key:"+key+"value:"+metadata.getString(key));
                                 userMeta.put(key, metadata.getString(key));
                         }
 
                         Hotline.getInstance(cordovaContext).updateUserProperties(userMeta);
-                        callbackContext.success();    
+                        callbackContext.success();
 
                     return true;
                 }
@@ -212,29 +232,12 @@ public class HotlinePlugin extends CordovaPlugin {
                     return true;
                 }
 
-                if(action.equals("registerPushNotification")) {
-
-                    if(args.length() == 0) {
-                        Log.e(LOG_TAG,"Please provide the sender Id to register for push notification");
-                        return false;
-                    }
-                    String senderId = args.getString(0);
-                    Log.i(LOG_TAG,"inside Android Notification Registeration with sender Id: " + senderId);
-                    if(checkPlayServices()) {
-                        Intent intent = new Intent(cordovaContext, HotlineGcmRegistrationService.class);
-                        intent.putExtra("id", senderId);
-                        cordovaContext.startService(intent);
-                        return true;
-                    }
-                    return false;
-                }
-
                 if(action.equals("getVersionName")) {
                     Log.d(LOG_TAG,"version number called");
                     int versionNumber = Hotline.getInstance(cordovaContext).getSDKVersionCode();
                     callbackContext.success(versionNumber);
-                    return true;  
-                } 
+                    return true;
+                }
 
                 if(action.equals("isHotlinePushNotificationInternal")) {
                     Log.d(LOG_TAG,"check if a particular push notificaiton is a hotline push notification or not");
@@ -265,7 +268,7 @@ public class HotlinePlugin extends CordovaPlugin {
                        public void run() {
                             Hotline.getInstance(cordovaContext).handleGcmMessage(bundle);
                             callbackContext.success();
-                       } 
+                       }
                     });
 
                     return true;
@@ -283,7 +286,7 @@ public class HotlinePlugin extends CordovaPlugin {
                 }
 
                 Log.d(LOG_TAG,"action does not have a function to match it:"+action);
-                
+
             } catch (Exception e) {
                 Log.e(LOG_TAG,"exception while perfroming action:"+action,e);
                 callbackContext.error("exception while performing action"+action);
@@ -291,6 +294,6 @@ public class HotlinePlugin extends CordovaPlugin {
         return true;
     }
 
-    
-    
+
+
 }

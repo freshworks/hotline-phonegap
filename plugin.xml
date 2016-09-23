@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns       =   "http://www.phonegap.com/ns/plugins/1.0"
         id          =   "cordova-plugin-hotline"
-        version     =   "0.5.2">
+        version     =   "0.6.0">
 
 
     <!-- Meta -->
@@ -28,9 +28,7 @@
         
         <!-- Move the Java wrapper class to specified location(which corresponds with the Class's pakage name) -->
         <source-file src="src/android/HotlinePlugin.java" target-dir="src/com/freshdesk/hotline/android" />
-        <source-file src="src/android/HotlineGcmListenerService.java" target-dir="src/com/freshdesk/hotline/android" />
-        <source-file src="src/android/HotlineGcmRegistrationService.java" target-dir="src/com/freshdesk/hotline/android" />
-        <source-file src="src/android/HotlineInstanceIDListenerService.java" target-dir="src/com/freshdesk/hotline/android" />
+
         <framework src="com.google.android.gms:play-services-gcm:8.+" />
         <!-- Pushing <feature> tag into android platform's config.xml -->
         <!-- This is needed for Cordova to recognize the plugin and for using the Java Class globally -->
@@ -46,46 +44,9 @@
             <permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" android:protectionLevel="signature" />
         </config-file>
         
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <!-- GCM Listener Service -->
-            <service
-                android:name="com.freshdesk.hotline.android.HotlineGcmListenerService"
-                android:exported="false" >
-                <intent-filter>
-                    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                </intent-filter>
-            </service>
- 
-            <!-- GCM Receiver -->
-            <receiver
-                android:name="com.google.android.gms.gcm.GcmReceiver"
-                android:exported="true"
-                android:permission="com.google.android.c2dm.permission.SEND">
-                    <intent-filter>
-                        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
- 
-                        <category android:name="$PACKAGE_NAME" />
-                    </intent-filter>
-            </receiver>
- 
-            <!-- InstanceIDListenerService -->
-            <service
-                android:name="com.freshdesk.hotline.android.HotlineInstanceIDListenerService"
-                android:exported="false">
-                    <intent-filter>
-                        <action android:name="com.google.android.gms.iid.InstanceID"/>
-                    </intent-filter>
-            </service>
- 
-            <service
-                android:name="com.freshdesk.hotline.android.HotlineGcmRegistrationService"
-                android:exported="false" />
-            
-        </config-file>
         <!-- Including the HotlineSDK(which is included as such) as a framework -->
-        <!-- The custom parameter makes Cordova look for the SDK in a relative location rather than the Android SDK -->
-        <framework src="src/android/Hotline" custom="true" />
+        <!-- The custom parameter makes Cordova look for the gradle file in a relative location rather than the Android SDK -->
+        <framework src="src/android/Hotline/build.gradle" custom="true" type="gradleReference" />
         
     </platform>
 
@@ -101,9 +62,6 @@
         <!-- PLUGIN HEADER AND SOURCE FILES -->
         <header-file src="src/ios/HotlinePlugin.h" target-dir="HotlineiOSPlugin"/>
         <source-file src="src/ios/HotlinePlugin.m" target-dir="HotlineiOSPlugin"/>
-        
-        <header-file src="src/ios/Appdelegate+HotlinePush.h" target-dir="HotlineiOSPlugin"/>
-        <source-file src="src/ios/Appdelegate+HotlinePush.m" target-dir="HotlineiOSPlugin"/>
         
         <!-- HOTLINE SDK -->
         
