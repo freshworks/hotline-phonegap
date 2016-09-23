@@ -9,7 +9,6 @@
 
 #import "HotlinePlugin.h"
 #import "Hotline.h"
-#import "Appdelegate+HotlinePush.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -41,13 +40,6 @@
     NSString* appId = [initParams objectForKey:@"appId"];
     NSString* appKey = [initParams objectForKey:@"appKey"];
     
-    BOOL cameraCapture = [[initParams objectForKey:@"cameraCaptureEnabled"] boolValue];
-    BOOL voiceMessaging = [[initParams objectForKey:@"voiceMessagingEnabled"] boolValue];
-    BOOL pictureMessaging = [[initParams objectForKey:@"pictureMessagingEnabled"] boolValue];
-    BOOL agentAvatar = [[initParams objectForKey:@"agentAvatarEnabled"] boolValue];
-    BOOL FAQsAsGrid = [[initParams objectForKey:@"displayFAQsAsGrid"] boolValue];
-    BOOL notificationAsBanner = [[initParams objectForKey:@"showNotificationBanner"] boolValue];
-    
     HotlineConfig *config = [[HotlineConfig alloc]initWithAppID:appId  andAppKey:appKey];
     NSLog(@"Inside init appId:%@ appKey:%@ domain:%@", appId, appKey, domain);
     
@@ -56,29 +48,27 @@
         config.domain = domain;
     }
     
-    if( cameraCapture) {
-        config.cameraCaptureEnabled = cameraCapture;
+    if(initParams [@"cameraCaptureEnabled"]) {
+        config.cameraCaptureEnabled = [[initParams objectForKey:@"cameraCaptureEnabled"] boolValue];
     }
     
-    if(voiceMessaging) {
-        config.voiceMessagingEnabled = voiceMessaging;
+    if(initParams [@"voiceMessagingEnabled"]) {
+        config.voiceMessagingEnabled = [[initParams objectForKey:@"voiceMessagingEnabled"] boolValue];
     }
     
-    if(pictureMessaging) {
-        config.pictureMessagingEnabled = pictureMessaging;
+    if(initParams [@"pictureMessagingEnabled"]) {
+        config.pictureMessagingEnabled = [[initParams objectForKey:@"pictureMessagingEnabled"] boolValue];
     }
     
-    if(agentAvatar) {
-        config.agentAvatarEnabled = agentAvatar;
+    if(initParams [@"agentAvatarEnabled"]) {
+        config.agentAvatarEnabled = [[initParams objectForKey:@"agentAvatarEnabled"] boolValue];
     }
 
-    if(FAQsAsGrid) {
-        config.displayFAQsAsGrid = FAQsAsGrid;
+    if(initParams [@"showNotificationBanner"]) {
+        config.showNotificationBanner = [[initParams objectForKey:@"showNotificationBanner"] boolValue];
     }
 
-    if(notificationAsBanner) {
-        config.showNotificationBanner = notificationAsBanner;
-    }
+    [[Hotline sharedInstance] updateUserPropertyforKey:@"Phonegap iOS" withValue:@"Version : 0.6"];
     [[Hotline sharedInstance] initWithConfig:config];
     [self callbackToJavascriptWithoutResultForCommand:command];
 }
@@ -88,7 +78,33 @@
 }
 
 - (void) showFAQs :(CDVInvokedUrlCommand*)command {
-    [[Hotline sharedInstance] showFAQs:[self viewController]];
+    NSArray* arguments = [command arguments];
+    NSDictionary* faqParams;
+    if(arguments != nil && arguments.count > 0) {
+        faqParams = [arguments firstObject];
+        FAQOptions *options = [FAQOptions new];
+        
+        if(faqParams [@"showFaqCategoriesAsGrid"]) {
+            options.showFaqCategoriesAsGrid = [[faqParams objectForKey:@"showFaqCategoriesAsGrid"] boolValue];
+        }
+        if(faqParams [@"showContactUsOnFaqScreens"]) {
+            options.showContactUsOnFaqScreens = [[faqParams objectForKey:@"showContactUsOnFaqScreens"] boolValue];
+        }
+        if(faqParams [@"showContactUsOnAppBar"]) {
+            options.showContactUsOnAppBar = [[faqParams objectForKey:@"showContactUsOnAppBar"] boolValue];
+        }
+        NSMutableArray *tagsList = [NSMutableArray array];
+        NSArray* tags = [faqParams objectForKey:@"tags"];
+        if(tags != nil && tags.count > 0) {
+            for(int i=0; i<tags.count; i++) {
+                [tagsList addObject:[tags objectAtIndex:i]];
+            }
+            [options filterByTags:tagsList withTitle:[faqParams objectForKey:@"filteredViewTitle"]];
+        }
+        [[Hotline sharedInstance]showFAQs:[self viewController] withOptions:options];
+    } else {
+        [[Hotline sharedInstance] showFAQs:[self viewController]];
+    }
 }
 
 - (void) clearUserData : (CDVInvokedUrlCommand*)command {
@@ -158,19 +174,9 @@
         }
 }
 
-- (void) registerPushNotification : (CDVInvokedUrlCommand*)command{
-    NSLog(@"Notification is being registered");
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }else{
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    }
-}
-
 - (void) getVersionName :(CDVInvokedUrlCommand*)command {
-    NSInteger versionNumber = [Hotline SDKVersion];
-    NSLog(@"Hotline version: %ld", versionNumber);
+    NSString* versionNumber = [Hotline SDKVersion];
+    NSLog(@"Hotline version: %@", versionNumber);
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:(int)versionNumber];
     [self callbackToJavascriptWithResult:result ForCommand:command];
 }
@@ -191,6 +197,7 @@
 }
 
 - (void) isHotlinePushNotificationInternal :(CDVInvokedUrlCommand*)command {
+    NSLog(@"checking if hotline push notification");
     NSArray* arguments = [command arguments];
     NSDictionary* info;
     if(arguments != nil && arguments.count > 0) {

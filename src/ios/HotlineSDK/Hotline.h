@@ -11,7 +11,7 @@
 
 #define HOTLINE_UNREAD_MESSAGE_COUNT @"com.freshdesk.hotline_unread_notification_count"
 
-@class HotlineConfig, HotlineUser;
+@class HotlineConfig, HotlineUser, FAQOptions;
 
 @interface HotlineConfig : NSObject
 
@@ -48,11 +48,6 @@
  */
 @property (nonatomic, strong) NSString *stringsBundle;
 /*
- * Option to Switch between Grid and List view in FAQs. Shows FAQ categories as a list when set to NO.
- * Default set to YES which presents a Grid view
- */
-@property (nonatomic, assign) BOOL displayFAQsAsGrid;
-/*
  * Allow the user to attach images using the camera. Defaults to YES.
  */
 @property (nonatomic, assign) BOOL cameraCaptureEnabled;
@@ -72,7 +67,6 @@
  * Enable/Disable Polling for messages when the app is Active . Defaults to NO
  */
 @property (nonatomic, assign) BOOL pollWhenAppActive;
-
 
 /**
  *  Initialize Hotline.
@@ -126,6 +120,18 @@
  *
  */
 -(void)showFAQs:(UIViewController *)controller;
+
+/**
+ *  Show the FAQs to the user.
+ *
+ *  @discussion This method lets you show the FAQ view.
+ *
+ *  @param controller The view controller from where you present the FAQ view.
+ *
+ *  @param options filter by tags or control FAQ screen options
+ *
+ */
+-(void)showFAQs:(UIViewController *)controller withOptions:(FAQOptions *)options;
 /**
  *  Update user Info
  *
@@ -142,12 +148,13 @@
  *  This will clean up all the data associated with the SDK for the user.
  *
  */
--(void)clearUserData __deprecated;
+-(void)clearUserData __attribute__((deprecated("Please use clearUserDataWithCompletion: instead")));
 /**
  *  Clear User Data
  *
  *  @discussion Use this function when your user needs to log out of the app .
  *  This will clean up all the data associated with the SDK for the user.
+ *  Please use the completion block if you are updating user information or subsequently calling init 
  *  
  * @param Completion block to be called when clearData is completed
  *
@@ -236,9 +243,9 @@
  */
 -(void)unreadCountWithCompletion:(void(^)(NSInteger count))completion;
 
--(void) updateConversationBannerMessage :(NSString *) message;
+-(void)updateConversationBannerMessage:(NSString *)message;
 
--(void) sendMessage: (NSString *) message onChannel: (NSString *) channelName;
+-(void)sendMessage:(NSString *)message onChannel:(NSString *)channelName;
 
 @end
 
@@ -270,5 +277,51 @@
  * Access the user info. If update user was called earlier, the instance would contain the persisted values.
  */
 +(instancetype)sharedInstance;
+
+@end
+
+@interface FAQOptions : NSObject
+
+/*
+ * Option to Switch between Grid and List view in FAQs. Shows FAQ categories as a list when set to NO.
+ * Default set to YES which presents a Grid view
+ */
+@property (nonatomic) BOOL showFaqCategoriesAsGrid;
+/*
+ * Option to show "contact us" button on the FAQ Screens,
+ * Default set to YES which shows "contact us" button
+ */
+@property (nonatomic) BOOL showContactUsOnFaqScreens;
+/*
+ * Option to show "contact us" button on the navigation bar,
+ * Default set to NO which hides "contact us" button on the navigation bar
+ */
+@property (nonatomic) BOOL showContactUsOnAppBar;
+
+/**
+ *  Show Filtered articles list
+ *
+ *  @discussion This method lets you to launch and present a controller with the list of articles filtered by the tags supplied
+ *
+ *  @param List of tags that are configured already the portal
+ *
+ *  @param Controller's navigation bar title
+ *
+ */
+-(void)filterByTags:(NSArray *)tags withTitle:(NSString *)title;
+
+/**
+ *  Preferred navigation bar title
+ *
+ *  @discussion
+ */
+-(NSString *)filteredViewTitle;
+
+/**
+ *  List of tags you have supplied already
+ *
+ *  @discussion List of tags which are configured in portal
+ */
+-(NSArray *)tags;
 
 @end

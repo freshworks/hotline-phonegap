@@ -39,27 +39,6 @@ var createWrapperForNativeFunction = function(functionName) {
 
 var Hotline = {}
 
-Hotline.init = function(args, cb) {
-    args = args || {};
-    cb = cb || function() {};
-    
-    //Assign default values
-    var configDefaults = {
-        agentAvatarEnabled      : false,
-        cameraCaptureEnabled    : true,
-        voiceMessagingEnabled   : false,
-        pictureMessagingEnabled : true,
-        displayFAQsAsGrid       : true,
-        showNotificationBanner  : true,
-        domain                  : "app.hotline.io"
-    };
-    for (k in configDefaults)
-        args[k] = args[k] || configDefaults[k];
-    
-    //Call native function
-    createWrapperForNativeFunction("init")(args, cb);
-}
-
 Hotline.isHotlinePushNotification = function(args, cb){
     
     Hotline.isHotlinePushNotificationInternal(args,function(success, isHotline){
@@ -69,8 +48,8 @@ Hotline.isHotlinePushNotification = function(args, cb){
 
 //Add Wrapper functions to Hotline
 var functionList = [
+    "init",
     "unreadCount",
-    "registerPushNotification",
     "clearUserData",
     "updateUser",
     "updateUserProperties",

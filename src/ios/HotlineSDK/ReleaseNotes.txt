@@ -2,7 +2,45 @@ Hotline iOS SDK - Powered by Freshdesk
 
 Documentation   : https://hotline.freshdesk.com/support/solutions
 Support Email   : support@hotline.io 
-Version         : 1.1.0
+Version         : 1.1.7
+
+Ver 1.1.7 
+__________________________
+didStartPlaying API reference removed. This internal API had a name conflict with Apple's private API causing app store submission to be rejected
+
+Ver 1.1.6 
+__________________________
+Fix validation error on User Property
+
+Ver 1.1.5 
+__________________________
+Exception for Media permission check removed
+
+Ver 1.1.4 
+__________________________
+Validation for iOS10 permission entries in Info.plist
+Filtered solutions are now sorted by category and article positions.
+Added Validation for user properties to allow them to used with smart plugs. 
+
+Ver 1.1.3 
+__________________________
+Added background theme entry for In-app Notification banner 
+Fixed a Jitter for some third party keyboards 
+Removed Deprecated Config for ShowFAQsAsGrid
+
+Ver 1.1.2 
+__________________________
+Theme now support system default font. Allows you to use Helvetica on iOS 8 and below and San Francisco on iOS9 and above.
+Added Theming for Links in Messages.
+Fixed Tab bar issue with single Channel.
+Fixed Crash when nil domain is passed in. 
+User details are automatically updated when the network connectivity is restored. 
+
+Ver 1.1.1 
+__________________________
+You can now hide contact us on the FAQ screens 
+You can show a  filtered view of articles by tags. 
+Minor fixes and improvements. 
 
 Ver 1.1.0 
 __________________________
@@ -13,7 +51,7 @@ IPv6 Compatibility as mandated by Apple -> https://developer.apple.com/news/?id=
 Support for Cross linking FAQs. You can link to another article with "faq://<articleid>" from within an article.
 New API for sending a customizable message on behalf of the user to a particular channel 
 Removed Dependency on AdSupport.framework
-UI Improvements
+UI Improvements 
 
 Ver 1.0.13 
 __________________________
