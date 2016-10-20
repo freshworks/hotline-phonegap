@@ -185,7 +185,7 @@ Whenever a push notification is received. You will need to check if the notifica
 push.on('notification',function(data) {
   window.Hotline.isHotlinePushNotification(data.additionalData, function(success, isHotlineNotif) {
     if( success && isHotlineNotif ) {
-      window.Hotline.handlePush(data.additionalData);
+      window.Hotline.handlePushNotification(data.additionalData);
     }
  });
 });
