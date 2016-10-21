@@ -58,11 +58,19 @@ var functionList = [
     "getVersionName",
     "isHotlinePushNotificationInternal",
     "handlePushNotification",
-    "updateRegistrationToken"
+    "updateRegistrationToken",
+    "updateAndroidNotificationProperties"
 ];
 
 functionList.forEach(function(funcName) {
     Hotline[funcName] = createWrapperForNativeFunction(funcName);
 });
+
+Hotline.NotificationPriority = {};
+Hotline.NotificationPriority.PRIORITY_DEFAULT  = 0;
+Hotline.NotificationPriority.PRIORITY_HIGH = 1;
+Hotline.NotificationPriority.PRIORITY_LOW = -1;
+Hotline.NotificationPriority.PRIORITY_MAX = 2;
+Hotline.NotificationPriority.PRIORITY_MIN = -2;
 
 module.exports = Hotline;
