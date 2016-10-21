@@ -285,6 +285,40 @@ public class HotlinePlugin extends CordovaPlugin {
                     return true;
                 }
 
+                if(action.equals("updateAndroidNotificationProperties")) {
+                    Log.d(LOG_TAG,"setting notification properties!");
+                    if(args.length() == 0) {
+                        Log.e(LOG_TAG,"Please provide parameters to update a user");
+                        return false;
+                    }
+                    JSONObject jsonArgs = new JSONObject(args.getString(0));
+                    HotlineNotificationConfig notificationConfig = new HotlineNotificationConfig();
+                    
+                    if(jsonArgs.has("notificationSoundEnabled")) {
+                        notificationConfig.setNotificationSoundEnabled(jsonArgs.getBoolean("notificationSoundEnabled"));
+                    }
+                    if(jsonArgs.has("smallIcon")) {
+                        String iconName = jsonArgs.getString("smallIcon");
+                        int iconId = cordovaContext.getResources().getIdentifier(iconName, "drawable", cordovaContext.getPackageName());
+                        notificationConfig.setSmallIcon(iconId);
+                    }
+                    if(jsonArgs.has("largeIcon")) {
+                        String iconName = jsonArgs.getString("largeIcon");
+                        int iconId = cordovaContext.getResources().getIdentifier(iconName, "drawable", cordovaContext.getPackageName());
+                        notificationConfig.setLargeIcon(iconId);
+                    }
+                    if(jsonArgs.has("deepLinkTargetOnNotificationClick")) {
+                        notificationConfig.launchDeepLinkTargetOnNotificationClick(jsonArgs.getBoolean("deepLinkTargetOnNotificationClick"));
+                    }
+                    if(jsonArgs.has("launchActivityOnFinish")) {
+                        notificationConfig.launchActivityOnFinish(jsonArgs.getString("launchActivityOnFinish"));
+                    }
+                    if(jsonArgs.has("notificationPriority")) {
+                        notificationConfig.setPriority(jsonArgs.getInt("notificationPriority"));
+                    }
+                    Hotline.getInstance(cordovaContext).setNotificationConfig(notificationConfig);
+                    return true;
+                }
                 Log.d(LOG_TAG,"action does not have a function to match it:"+action);
 
             } catch (Exception e) {
