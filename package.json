@@ -1,0 +1,44 @@
+{
+  "name": "hotline",
+  "version": "1.0.0",
+  "description": "Plugin for integrating the Hotline SDK into a Phonegap/Cordova project",
+  "cordova": {
+    "id": "cordova-plugin-hotline",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freshdesk/hotline-phonegap.git"
+  },
+  "keywords": [
+    "freshdesk",
+    "hotline",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "chat",
+    "support"
+  ],
+  "engines": [
+    {
+      "name": "cordova-android",
+      "version": ">=4.0.0"
+    },
+    {
+      "name": "cordova-ios",
+      "version": ">=3.8.0"
+    }
+  ],
+  "author": "Freshdesk Inc",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/freshdesk/hotline-phonegap/issues"
+  },
+  "homepage": "http://hotline.io",
+  "main": "index.js"
+}

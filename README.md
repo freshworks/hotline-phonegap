@@ -3,6 +3,14 @@
 
 This plugin integrates Hotline's SDK into a Phonegap/Cordova project.
 
+You can reach us anytime at contactus@hotline.io if you run into trouble.
+
+AppId and AppKey
+You'll need these keys while integrating Hotline SDK with your app. you can get the same from the [Settings -> API&SDK](https://web.hotline.io/settings/apisdk) page. Do not share them with anyone.
+If you do not have an account, you can get started for free at [hotline.io](https://hotline.io/) 
+
+[Where to find AppId and AppKey](https://hotline.freshdesk.com/solution/articles/9000041894-where-to-find-app-id-and-app-key-)
+
 For platform specific details please refer to the [Documentation](http://support.hotline.io/support/solutions/160796)
 
 Supported platforms :
@@ -21,13 +29,13 @@ cordova platform add ios
 
 2. Add the hotline plugin to your project.
 ```shell
-cordova plugin add https://github.com/freshdesk/hotline-phonegap.git
+cordova plugin add hotline
 ```
 
 
 ### Initializing the plugin
 
-_Hotline.init_ needs to be called from _ondeviceready_ event listener to make sure the SDK is initialized before use.
+_Hotline.init_  needs to be called from _ondeviceready_  event listener to make sure the SDK is initialized before use.
 
 ```javascript
 document.addEventListener("deviceready", function(){
@@ -38,18 +46,6 @@ document.addEventListener("deviceready", function(){
   });
 });
 ```
-
- If you have are a Konotor user add a key called "domain" and "app.konotor.com". so your init code would look like this:
- ```javascript
-document.addEventListener("deviceready", function(){
-  //Initialize Hotline
-  window.Hotline.init({
-    appId       : "<Your App Id>",
-    appKey      : "<Your App Key>",
-    domain      : "app.konotor.com"
-  });
-});
- ```
 
  The following optional boolean parameters can be passed to the init Object
  -  agentAvatarEnabled  
@@ -104,10 +100,12 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
     - Launch FAQ / Self Help
     
     The following FAQOptions can be passed to the showFAQs() call
+    
         -showFaqCategoriesAsGrid
         -showContactUsOnAppBar
         -showContactUsOnFaqScreens
         -showContactUsOnFaqNotHelpful
+        
     Here is a sample call to showFAQs() with the additional parameters:
     ```javascript
     window.Hotline.showFAQs( {
@@ -128,8 +126,10 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
     ```
 * Hotline.showConversations()
     - Launch Channels / Conversations.
+    
 * Hotline.unreadCount(callback)
     - Fetch count of unread messages from agents.
+    
 * Hotline.updateUser(userInfo)
     - Update user info. Accepts a JSON with the following format  
 ```javascript
@@ -185,7 +185,7 @@ Whenever a push notification is received. You will need to check if the notifica
 push.on('notification',function(data) {
   window.Hotline.isHotlinePushNotification(data.additionalData, function(success, isHotlineNotif) {
     if( success && isHotlineNotif ) {
-      window.Hotline.handlePush(data.additionalData);
+      window.Hotline.handlePushNotification(data.additionalData);
     }
  });
 });
