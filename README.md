@@ -152,7 +152,7 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
 * Hotline.clearUserData()
     - Clear user data when users logs off your app.
 
-You can pass in an optional callback function to an API as the first parameter, which gets called when native API is completed.
+You can pass in an optional callback function to an API as the last parameter, which gets called when native API is completed. 
 Eg.
 ```javascript
 window.Hotline.unreadCount(function(success,val) {
@@ -191,6 +191,37 @@ push.on('notification',function(data) {
 });
 ```
 
+Android notification properties can be changed with the updateAndroidNotificationProperties API. The properties that can be updated are.
+
+-  "notificationSoundEnabled" : Notifiction sound enabled or not.
+-  "smallIcon" : Setting a small notification icon (move the image to drawbles folder and pass the name of the jpeg file as parameter).
+-  "largeIcon" : setting a large notification icon.
+-  "deepLinkTargetOnNotificationClick" : Toggles if the deeplink target of a notification should open on click.
+-  "notificationPriority" : set the priority of notification through hotline.
+-  "launchActivityOnFinish" : Activity to launch on up navigation from the messages screen launched from notification. The messages screen will have no activity to navigate up to in the backstack when its launched from notification. Specify the activity class name to be launched.
+
+
+The API is called like:
+    
+```javascript
+window.Hotline.updateAndroidNotificationProperties({
+                "smallIcon" : "image",
+                "largeIcon" : "image",
+                "notificationPriority" : window.Hotline.NotificationPriority.PRIORITY_MAX,
+                "notificationSoundEnabled" : false,
+                "deepLinkTargetOnNotificationClick" : true
+                "launchActivityOnFinish" : "MainActivity.class.getName()"
+            });
+```
+List of hotline Priorities:
+
+-  Hotline.NotificationPriority.PRIORITY_DEFAULT
+-  Hotline.NotificationPriority.PRIORITY_HIGH
+-  Hotline.NotificationPriority.PRIORITY_LOW
+-  Hotline.NotificationPriority.PRIORITY_MAX
+-  Hotline.NotificationPriority.PRIORITY_MIN
+
+They follow the same priority order as Android's NotificaitonCompat.
 ##### DEPRECATED!
 
 If you have been using the registerPushNotification call up until now, we recommend you use the method suggested above as we are removing support for it
