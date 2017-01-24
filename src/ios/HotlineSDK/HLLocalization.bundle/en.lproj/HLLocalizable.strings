@@ -8,7 +8,7 @@
 /* Solution Categories*/
 "faq_title_text"="FAQs";
 "faq_close_button_text"="Close";
-"contact_us_button_text"="Contact Us";
+"contact_us_button_text"="Message Us";
 
 /* Article UpVote DownVote */
 "article_vote_prompt_text"="Was this helpful?";
@@ -17,7 +17,7 @@
 
 /* Article Vote thank you prompt */
 "thank_you_prompt_text"="Thanks for your feedback";
-"thank_you_prompt_contact_us_button_text"="Still need help? Contact Us";
+"thank_you_prompt_contact_us_button_text"="Still need help? Message Us";
 
 /* Article Detail */
 "offline_missing_content_text"="Please connect to the internet to view media content available on this article.";
@@ -53,6 +53,7 @@
 "modify_push_setting_info_text"="To be notified of responses even when out of this chat, enable push notifications for this app via the Settings->Notification Center";
 "message_unsent_title"="Message not sent";
 "message_unsent_info_text"="We could not send your message(s) at this time. Check your internet or try later.";
+"server_error_info_text"="Problem sending message. Please try again later.";
 
 /* Posting audio message alerts */
 "short_audio_alert_title" = "Message too short";
@@ -66,6 +67,8 @@
 "search_empty_result_text"="Whoops! We couldn't find what you were looking for.";
 "empty_channel_text" = "No Channels are available";
 "empty_faq_text" = "No FAQs are available";
+"loading_channel_text" = "Loading Channels";
+"loading_faq_text" = "Loading FAQs";
 
 /* Camera Unavailable alert */
 "camera_unavailable_title"="Camera Unavailable";
@@ -89,3 +92,15 @@
 
 /*Notifications*/
 "notification_message_default"="Hey, you have a new message";
+
+/* Customer Satisfaction Survey */
+
+/* Yes No Prompt */
+"chat_resolution_prompt_text"="Did we address your concerns ?";
+"chat_resolution_prompt_yes_button_text"="Yes!";
+"chat_resolution_prompt_no_button_text"="No";
+
+/* Survey prompt */
+"cust_sat_not_resolved_prompt"="How could we have helped better ?";
+"cust_sat_user_comments_placeholder"="Enter your feedback here";
+"cust_sat_submit_button_text"="SUBMIT";

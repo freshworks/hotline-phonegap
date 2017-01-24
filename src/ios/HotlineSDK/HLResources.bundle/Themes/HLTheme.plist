@@ -36,6 +36,8 @@
 		<string>14.0f</string>
 		<key>SendButtonColor</key>
 		<string>0079FF</string>
+		<key>BackgroundColor</key>
+		<string>FFFFFF</string>
 		<key>Banner</key>
 		<dict>
 			<key>BackgroundColor</key>
@@ -47,6 +49,66 @@
 			<key>MessageTextColor</key>
 			<string>FFFFFF</string>
 		</dict>
+	</dict>
+	<key>ChatResolutionPrompt</key>
+	<dict>
+		<key>BackgroundColor</key>
+		<string>FFFFFF</string>
+		<key>SubmitButtonColor</key>
+		<string>007AFF</string>
+		<key>SubmitButtonTitleFontName</key>
+		<string>SYS_DEFAULT_FONT_NAME</string>
+		<key>SubmitButtonTitleFontSize</key>
+		<string>15</string>
+		<key>RatingBarColor</key>
+		<string>FFA500</string>
+		<key>HorizontalLineColor</key>
+		<string>D3D3D3</string>
+		<key>InputTextFontColor</key>
+		<string>000000</string>
+		<key>InputTextFontName</key>
+		<string>SYS_DEFAULT_FONT_NAME</string>
+		<key>InputTextFontSize</key>
+		<string>13</string>
+		<key>QuestionTextFontSize</key>
+		<string>13</string>
+		<key>QuestionTextFontName</key>
+		<string>SYS_DEFAULT_FONT_NAME</string>
+		<key>QuestionTextColor</key>
+		<string>000000</string>
+	</dict>
+	<key>CustSatDialogue</key>
+	<dict>
+		<key>YesButtonFontColor</key>
+		<string>FFFFFF</string>
+		<key>YesButtonFontName</key>
+		<string>SYS_DEFAULT_FONT_NAME</string>
+		<key>YesButtonFontSize</key>
+		<string>14</string>
+		<key>YesButtonBackgroundColor</key>
+		<string>007AFF</string>
+		<key>NoButtonFontColor</key>
+		<string>535353</string>
+		<key>NoButtonFontName</key>
+		<string>SYS_DEFAULT_FONT_NAME</string>
+		<key>NoButtonFontSize</key>
+		<string>14</string>
+		<key>NoButtonBackgroundColor</key>
+		<string>F6F6F5</string>
+		<key>NoButtonBorderColor</key>
+		<string>C1C1BF</string>
+		<key>YesButtonBorderColor</key>
+		<string>D8D8D8</string>
+		<key>ButtonColor</key>
+		<string>007AFF</string>
+		<key>BackgroundColor</key>
+		<string>F6F6F5</string>
+		<key>LabelFontColor</key>
+		<string>535353</string>
+		<key>LabelFontName</key>
+		<string>SYS_DEFAULT_FONT_NAME</string>
+		<key>LabelFontSize</key>
+		<string>15</string>
 	</dict>
 	<key>ChatBubbleInsets</key>
 	<dict>
@@ -129,6 +191,8 @@
 		<string>SYS_DEFAULT_FONT_NAME</string>
 		<key>ChannelTitleFontSize</key>
 		<string>15.0f</string>
+		<key>ChannelCellBackgroundColor</key>
+		<string>FFFFFF</string>
 		<key>ChannelDescriptionFontColor</key>
 		<string>ABABAB</string>
 		<key>ChannelDescriptionFontName</key>
@@ -185,7 +249,7 @@
 	<key>OverallSettings</key>
 	<dict>
 		<key>BackgroundColor</key>
-		<string>EFEFF4</string>
+		<string>FFFFFF</string>
 		<key>TalkToUsButtonFontColor</key>
 		<string>FFFFFF</string>
 		<key>TalkToUsButtonBackgroundColor</key>
@@ -258,6 +322,8 @@
 		<string>FFFFFF</string>
 		<key>BorderColor</key>
 		<string>F2F2F2</string>
+		<key>BackgroundColor</key>
+		<string>FFFFFF</string>
 	</dict>
 	<key>Images</key>
 	<dict>

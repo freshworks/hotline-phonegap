@@ -44,6 +44,7 @@ public class HotlinePlugin extends CordovaPlugin {
     private boolean isInitialized = false;
     private HotlineConfig hotlineConfig;
     private FaqOptions faqOptions;
+    private ConversationOptions conversationOptions;
     private Context cordovaContext;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 3458;
     private static final String LOG_TAG = "Hotline";
@@ -108,10 +109,7 @@ public class HotlinePlugin extends CordovaPlugin {
                             callbackContext.success();
                        }
                     });
-
                     this.isInitialized = true;
-                    this.hotlineConfig = hotlineConfig;
-
                     return true;
                 }
 
@@ -142,16 +140,47 @@ public class HotlinePlugin extends CordovaPlugin {
                         for (int i = 0; i < tags.length(); i++) {
                             tagsList.add(tags.getString(i));
                         }
-                        faqOptions.filterByTags(tagsList, faqArgs.getString("filteredViewTitle"));
+                        String title = faqArgs.getString("filteredViewTitle");
+                        if(faqArgs.getString("articleType").equals("category")){
+                            faqOptions.filterByTags(tagsList, title, FaqOptions.FilterType.CATEGORY);
+                        } else {
+                                faqOptions.filterByTags(tagsList, title, FaqOptions.FilterType.ARTICLE);
+                        }
+                        List<String> contactusTagsList = new ArrayList<String>();
+                        if(faqArgs.optJSONArray("contactusTags") != null) {
+                            JSONArray contactusTags = faqArgs.getJSONArray("contactusTags");
+                            for (int i = 0; i < contactusTags.length(); i++) {
+                                contactusTagsList.add(contactusTags.getString(i));
+                            }
+                            title = faqArgs.getString("contactusFilterTitle");
+                            faqOptions.filterContactUsByTags(contactusTagsList, title);
+                        }
+                        Hotline.showFAQs(cordovaContext, faqOptions);
+                    } else {
+                        Hotline.showFAQs(cordovaContext);
                     }
-                    Hotline.showFAQs(cordovaContext, faqOptions);
                     callbackContext.success();
                     return true;
                 }
 
                 if(action.equals("showConversations")) {
                     Log.d(LOG_TAG,"show Conversations has been called");
-                    Hotline.showConversations(cordovaContext);
+                    if(args.length() == 0) {
+                        Hotline.showConversations(cordovaContext);
+                        return true;
+                    }
+                    JSONObject conversationArgs = new JSONObject(args.getString(0));
+                    conversationOptions = new ConversationOptions();
+                    List<String> tagsList = new ArrayList<String>();
+                    if(conversationArgs.optJSONArray("tags") != null) {
+                        JSONArray tags = conversationArgs.getJSONArray("tags");
+                        for (int i = 0; i < tags.length(); i++) {
+                            tagsList.add(tags.getString(i));
+                        }
+                        String title = conversationArgs.getString("filteredViewTitle");
+                        conversationOptions.filterByTags(tagsList, title);
+                    }
+                    Hotline.showConversations(cordovaContext, conversationOptions);
                     callbackContext.success();
                     return true;
                 }
@@ -209,11 +238,9 @@ public class HotlinePlugin extends CordovaPlugin {
                                 String key = keys.next();
                                 userMeta.put(key, metadata.getString(key));
                         }
-
                         Hotline.getInstance(cordovaContext).updateUserProperties(userMeta);
                         callbackContext.success();
-
-                    return true;
+                        return true;
                 }
 
                 if(action.equals("unreadCount")) {

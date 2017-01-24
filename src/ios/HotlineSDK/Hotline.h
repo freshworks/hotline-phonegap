@@ -9,9 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define HOTLINE_UNREAD_MESSAGE_COUNT @"com.freshdesk.hotline_unread_notification_count"
+enum TagFilterType {
+    ARTICLE  = 1,
+    CATEGORY = 2
+};
 
-@class HotlineConfig, HotlineUser, FAQOptions;
+#define HOTLINE_UNREAD_MESSAGE_COUNT @"com.freshdesk.hotline_unread_notification_count"
+#define HOTLINE_DID_FINISH_PLAYING_AUDIO_MESSAGE @"com.freshdesk.hotline_play_inapp_audio"
+#define HOTLINE_WILL_PLAY_AUDIO_MESSAGE @"com.freshdesk.hotline_pause_inapp_audio"
+
+@class HotlineConfig, HotlineUser, FAQOptions, ConversationOptions, HotlineMessage;
 
 @interface HotlineConfig : NSObject
 
@@ -111,6 +118,17 @@
  *
  */
 -(void)showConversations:(UIViewController *)controller;
+
+/**
+ *  Show the Conversations / Chat to the user.
+ *
+ *  @param options filter by tags
+ *
+ *  @discussion This method lets you launch and present the Channels list to the user. The user directly lands in the default Conversation view if no channels found.
+ *
+ */
+-(void)showConversations:(UIViewController *)controller withOptions :(ConversationOptions *)options;
+
 /**
  *  Show the FAQs to the user.
  *
@@ -245,7 +263,10 @@
 
 -(void)updateConversationBannerMessage:(NSString *)message;
 
--(void)sendMessage:(NSString *)message onChannel:(NSString *)channelName;
+/**
+ *  Send message to particular channel with specified tag value
+ */
+-(void) sendMessage:(HotlineMessage *)messageObject;
 
 @end
 
@@ -308,12 +329,30 @@
  *  @param Controller's navigation bar title
  *
  */
--(void)filterByTags:(NSArray *)tags withTitle:(NSString *)title;
+-(void) filterByTags:(NSArray *) tags withTitle:(NSString *) title __attribute__((deprecated("Please use filterByTags:withTitle:andType: with TagFilterType.ARTICLE for same result")));
 
 /**
- *  Preferred navigation bar title
+ *  @discussion This method lets you to filter the list of Categories or Articles by tags
  *
- *  @discussion
+ *  @param Array of tags to filter by. Tags can be configured in the portal
+ *
+ *  @param Title for the list of filtered view
+ *
+ *  @param Type can be either Category or Article determining what to show. ( list of filtered articles or categories)
+ */
+-(void) filterByTags:(NSArray *) tags withTitle:(NSString *) title  andType : (enum TagFilterType) type;
+
+/**
+ *  @discussion This method lets you to filter the list of Channels by tags when user clicks on contact us
+ *
+ *  @param Array of tags to filter the channels list
+ *
+ *  @param Title for the list of filtered channels view
+ */
+-(void)filterContactUsByTags:(NSArray *) tags withTitle:(NSString *) title;
+ 
+/**
+ *  Preferred navigation bar title
  */
 -(NSString *)filteredViewTitle;
 
@@ -323,5 +362,71 @@
  *  @discussion List of tags which are configured in portal
  */
 -(NSArray *)tags;
+
+/**
+ *  Tags Filter type - FAQ's or Articles tags
+ */
+-(enum TagFilterType) filteredType;
+
+/**
+ *  Tags used to filter channels when clicking on "Contact Us" on FAQ screens
+ */
+-(NSArray *) contactUsTags;
+
+/**
+ *  Title for the list of filtered channels view which clicking "Contact Us"
+ */
+-(NSString *) contactUsTitle;
+
+@end
+
+
+@interface ConversationOptions : NSObject
+
+/**
+ *  Show Filtered Channels
+ *
+ *  @discussion This method lets you to launch and present a controller with the list of Channels filtered by the tags
+ *
+ *  @param Array of tags to filter the channels list
+ *
+ *  @param Title for the list of filtered channels view
+ *
+ */
+-(void)filterByTags:(NSArray *)tags withTitle:(NSString *)title;
+
+/**
+ *  Preferred navigation bar title for filtered view of channels
+ */
+-(NSString *)filteredViewTitle;
+
+/**
+ *  Tags used for filtering the channels list
+ */
+-(NSArray *)tags;
+
+@end
+
+@interface HotlineMessage : NSObject
+
+/**
+ *  Message text to be sent
+ */
+@property (strong, nonatomic) NSString *message;
+
+/**
+ *  Tag of the channel on which the message needs to be sent
+ *  If tag does not match with any channel it is sent on the default channel
+ */
+@property (strong, nonatomic) NSString *tag;
+
+/**
+ *  Initialize the message object
+ *
+ *  @param Message text to send to agent
+ *
+ *  @param Tag of the channel on which the message needs to be sent
+ */
+-(instancetype)initWithMessage:(NSString *)message andTag:(NSString *)tag;
 
 @end

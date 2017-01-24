@@ -2,7 +2,58 @@ Hotline iOS SDK - Powered by Freshdesk
 
 Documentation   : https://hotline.freshdesk.com/support/solutions
 Support Email   : support@hotline.io 
-Version         : 1.1.7
+Version         : 1.3.1
+
+Ver 1.3.1 
+__________________________
+Fix poller when push notification doesn't work. 
+
+Ver 1.3.0 
+__________________________
+You can now filter Channels and Categories with Tags and present different views for different users.
+Send Message on behalf of the user on any channel using tags.
+Added theming entries for background color for screens.
+Fixed rare crash on clearUserData.
+Fixed UI hanging when edge swiping between channels to conversations.
+
+Ver 1.2.2 
+__________________________
+Add missing Bitcode support
+
+Ver 1.2.1 
+__________________________
+In app Notification banner now shows CSAT notification when push notification is disabled. 
+CSAT question can now support a larger question/text. 
+Unread count now includes pending CSAT responses.
+Better loading messages to inform users for Channels and FAQs list.
+Minor fixes and improvements.
+
+Ver 1.2.0 
+__________________________
+Release Notes:
+- Customer satisfaction survey feature
+- Allow theme file name with .plist extension 
+- Fixed issue with edge swipe on the conversation screen
+- Fixed jitter on search results. 
+- Fixed Audio issue for App that play background music 
+- Minor fixes and Improvements.
+
+Ver 1.1.10 
+__________________________
+Fix Tap metrics issue
+
+Ver 1.1.9 
+__________________________
+Added ability to change background color for chat/conversation screen
+Model will now show human friendly model name on the device info.
+Fixed an issue where messages retries were failing.
+Fixed issue with back button when there is only one channel.
+Memory leaks and performance fixes
+
+Ver 1.1.8 
+__________________________
+Missing media usage description disables picture and voice messaging on iOS10. This used to crash earlier on iOS10. Refer Docs for more info
+Minor fixes and logging added
 
 Ver 1.1.7 
 __________________________

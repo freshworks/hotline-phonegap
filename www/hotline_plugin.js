@@ -46,11 +46,32 @@ Hotline.isHotlinePushNotification = function(args, cb){
     });
 }
 
+Hotline.init = function(args, cb){
+    createWrapperForNativeFunction("init")(args,function(success){
+        if(success){
+            Hotline.trackPhoneGapSDKVersion();
+        }
+        if(cb) {
+            cb(success);
+        }
+    });
+}
+
+Hotline.trackPhoneGapSDKVersion = function() {
+  this.updateUserProperties({ Phonegap : "v1.1"});
+}
+
+Hotline.clearUserData = function() {
+    createWrapperForNativeFunction("clearUserData")(function(success){
+        if(success) {
+          Hotline.trackPhoneGapSDKVersion();
+        }
+    });
+}
+
 //Add Wrapper functions to Hotline
 var functionList = [
-    "init",
     "unreadCount",
-    "clearUserData",
     "updateUser",
     "updateUserProperties",
     "showConversations",
@@ -58,8 +79,7 @@ var functionList = [
     "getVersionName",
     "isHotlinePushNotificationInternal",
     "handlePushNotification",
-    "updateRegistrationToken",
-    "updateAndroidNotificationProperties"
+    "updateRegistrationToken"
 ];
 
 functionList.forEach(function(funcName) {
@@ -72,5 +92,9 @@ Hotline.NotificationPriority.PRIORITY_HIGH = 1;
 Hotline.NotificationPriority.PRIORITY_LOW = -1;
 Hotline.NotificationPriority.PRIORITY_MAX = 2;
 Hotline.NotificationPriority.PRIORITY_MIN = -2;
+
+Hotline.FilterType= {};
+Hotline.FilterType.ARTICLE = "article";
+Hotline.FilterType.CATEGORY = "category";
 
 module.exports = Hotline;
