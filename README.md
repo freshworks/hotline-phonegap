@@ -28,10 +28,15 @@ cordova platform add ios
 ```
 
 2. Add the hotline plugin to your project.
+
+You can add the plugin from command line like:
 ```shell
 cordova plugin add hotline
 ```
-
+You can also add it to your config.xml like 
+```javascript
+<plugin name="hotline" source="npm"/>
+```
 
 ### Initializing the plugin
 
@@ -124,9 +129,51 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
         filteredViewTitle   : "Tags"
     });
     ```
+    v1.1 adds support for filtering both categories and filters,
+    Example of filtering FAQs by Articles.
+    ```javascript
+    window.Hotline.showFAQs( {
+        tags :["sample","video"],
+        filteredViewTitle   : "Tags",
+        articleType   : Hotline.FilterType.ARTICLE
+    });
+    ```
+    v1.1 adds support for filtering both categories and filters,
+    Example of filtering FAQs by Categories.
+    ```javascript
+    window.Hotline.showFAQs( {
+        tags :["sample","video"],
+        filteredViewTitle   : "Tags",
+        articleType   : Hotline.FilterType.CATEGORY
+    });
+    ```
+    Not specifying an articleType, by default filters by Article.
+
 * Hotline.showConversations()
     - Launch Channels / Conversations.
-    
+  
+  v1.1 also adds supportto filter conversations with tags. This filters the list of channels shown to the user.
+  Example showing how to filter converstions using tags.
+  ```javascript
+    window.Hotline.showConversations( {
+        tags :["new","test"],
+        filteredViewTitle   : "Tags"
+    });
+    ```
+NOTE:- Filtering conversations is also supported inside FAQs, i.e show conversation button from the category list
+or the article list view can also be filtered. Here is a sample.
+  ```javascript
+    window.Hotline.showFAQs( {
+        tags :["sample","video"],
+        filteredViewTitle   : "Tags",
+        articleType   : Hotline.FilterType.CATEGORY,
+        contactusTags : ["test"], 
+        contactusFilterTitle: "contactusTags"
+    });
+    ```
+    In the above example clicking on show conversations in the filtered category list view takes you to a conversation
+    view filtered by the tag "test".
+
 * Hotline.unreadCount(callback)
     - Fetch count of unread messages from agents.
     
