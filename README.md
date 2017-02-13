@@ -160,9 +160,9 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
         filteredViewTitle   : "Tags"
     });
     ```
-    NOTE:- Filtering conversations is also supported inside FAQs, i.e show conversation button from the category list
-    or the article list view can also be filtered. Here is a sample.
-    ```javascript
+NOTE:- Filtering conversations is also supported inside FAQs, i.e show conversation button from the category list
+or the article list view can also be filtered. Here is a sample.
+  ```javascript
     window.Hotline.showFAQs( {
         tags :["sample","video"],
         filteredViewTitle   : "Tags",
@@ -171,6 +171,7 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
         contactusFilterTitle: "contactusTags"
     });
     ```
+
 In the above example clicking on show conversations in the filtered category list view takes you to a conversation
 view filtered by the tag "test".
 
@@ -228,7 +229,7 @@ here is a sample init function, call this in your onDeviceReady
 function initializePush() {
     var push = PushNotification.init({
         "android":{
-            "senderID":"20738924380"
+            "senderID":"XXXXXXXXXX"
         },
         "ios": {
             "alert": "true",
