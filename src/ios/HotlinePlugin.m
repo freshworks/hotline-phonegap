@@ -19,6 +19,11 @@
 }
 
 -(void) callbackToJavascriptWithoutResultForCommand:(CDVInvokedUrlCommand*)command {
+    CDVPluginResult* emptyResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self callbackToJavascriptWithResult:emptyResult ForCommand:command];
+}
+
+-(void) callbackToJavascriptWithoutResultFailureForCommand:(CDVInvokedUrlCommand*)command {
     CDVPluginResult* emptyResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     [self callbackToJavascriptWithResult:emptyResult ForCommand:command];
 }
@@ -67,15 +72,31 @@
     if(initParams [@"showNotificationBanner"]) {
         config.showNotificationBanner = [[initParams objectForKey:@"showNotificationBanner"] boolValue];
     }
-
-    [[Hotline sharedInstance] updateUserPropertyforKey:@"Phonegap iOS" withValue:@"Version : 0.6"];
     [[Hotline sharedInstance] initWithConfig:config];
     [self callbackToJavascriptWithoutResultForCommand:command];
 }
 
 - (void) showConversations :(CDVInvokedUrlCommand*)command {
-    [[Hotline sharedInstance] showConversations:[self viewController]];
-}
+        ConversationOptions *options = [ConversationOptions new];
+        NSArray* arguments = [command arguments];
+        NSDictionary* conversationParams;
+        if(arguments != nil && arguments.count > 0) {
+            conversationParams = [arguments firstObject];
+            NSMutableArray *tagsList = [NSMutableArray array];
+            NSArray* tags = [conversationParams objectForKey:@"tags"];
+            if(tags != nil && tags.count > 0) {
+                for(int i=0; i<tags.count; i++) {
+                    [tagsList addObject:[tags objectAtIndex:i]];
+                }
+                NSString* title = [conversationParams objectForKey:@"filteredViewTitle"];
+                [options filterByTags:tagsList withTitle:title];
+            }
+            [[Hotline sharedInstance] showConversations:[self viewController] withOptions: options];
+        } else {
+            [[Hotline sharedInstance] showConversations:[self viewController]];
+        }
+        [self callbackToJavascriptWithoutResultForCommand:command];
+    }
 
 - (void) showFAQs :(CDVInvokedUrlCommand*)command {
     NSArray* arguments = [command arguments];
@@ -95,29 +116,48 @@
         }
         NSMutableArray *tagsList = [NSMutableArray array];
         NSArray* tags = [faqParams objectForKey:@"tags"];
+        NSString* articleType = [faqParams objectForKey:@"articleType"];
         if(tags != nil && tags.count > 0) {
             for(int i=0; i<tags.count; i++) {
                 [tagsList addObject:[tags objectAtIndex:i]];
             }
-            [options filterByTags:tagsList withTitle:[faqParams objectForKey:@"filteredViewTitle"]];
+            NSString* title = [faqParams objectForKey:@"filteredViewTitle"];
+            if( [articleType isEqualToString:@"category"]) {
+                [options filterByTags:tagsList withTitle:title andType: CATEGORY];
+            } else {
+                [options filterByTags:tagsList withTitle:title andType: ARTICLE];
+            }
+        }
+        NSMutableArray *contactusTagsList = [NSMutableArray array];
+        NSArray* contactusTags = [faqParams objectForKey:@"contactusTags"];
+        if(contactusTags != nil && contactusTags.count > 0) {
+            for(int i=0; i<contactusTags.count; i++) {
+                [contactusTagsList addObject:[contactusTags objectAtIndex:i]];
+            }
+            NSString* contactusTitle = [faqParams objectForKey:@"contactusFilterTitle"];
+            [options filterContactUsByTags:contactusTagsList withTitle:contactusTitle];
         }
         [[Hotline sharedInstance]showFAQs:[self viewController] withOptions:options];
     } else {
-        [[Hotline sharedInstance] showFAQs:[self viewController]];
+        [[Hotline sharedInstance]showFAQs:[self viewController]];
     }
+    [self callbackToJavascriptWithoutResultForCommand:command];
 }
 
 - (void) clearUserData : (CDVInvokedUrlCommand*)command {
     [self.commandDelegate runInBackground:^{
-        [[Hotline sharedInstance]clearUserDataWithCompletion:nil];
+        [[Hotline sharedInstance]clearUserDataWithCompletion:^{
+            [self callbackToJavascriptWithoutResultForCommand:command];
+        }];
     }];
 }
 
 - (void) unreadCount :(CDVInvokedUrlCommand*)command {
-    NSInteger unreadCount = [[Hotline sharedInstance] unreadCount];
-    NSLog(@" The unread count value is: %d", unreadCount);
-    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:(int)unreadCount];
-    [self callbackToJavascriptWithResult:result ForCommand:command];
+    [[Hotline sharedInstance] unreadCountWithCompletion:^(NSInteger unreadCount) {
+        NSLog(@" The unread count value is: %ld", unreadCount);
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:(int)unreadCount];
+        [self callbackToJavascriptWithResult:result ForCommand:command];
+    }];
 }
 
 - (void) updateUser :(CDVInvokedUrlCommand*)command {
@@ -144,10 +184,11 @@
     }
     if([args objectForKey:@"externalId"] != nil) {
         user.externalID = [args objectForKey:@"externalId"];
-    }   
+    }
     [self.commandDelegate runInBackground:^{
         [[Hotline sharedInstance] updateUser:user];
-    }];
+        [self callbackToJavascriptWithoutResultForCommand:command];
+    }];  
 }
 
 - (void) updateUserProperties :(CDVInvokedUrlCommand*)command {
@@ -157,21 +198,22 @@
     if(arguments != nil && arguments.count > 0) {
         args = [arguments firstObject];
     } else {
-        [self callbackToJavascriptWithoutResultForCommand:command];
+        [self callbackToJavascriptWithoutResultFailureForCommand:command];
     }
-    
+
     NSArray *arrayOfKeys = [args allKeys];
     NSArray *arrayOfValues = [args allValues];
 
     NSString *key;
     NSString *value;
-    
+
         for(int i=0; i<arrayOfKeys.count; i++) {
             key = [arrayOfKeys objectAtIndex:i];
             value = [arrayOfValues objectAtIndex:i];
             NSLog(@" The userMeta key is: %@ value is: %@", key,value);
             [[Hotline sharedInstance] updateUserPropertyforKey:key withValue:value];
         }
+    [self callbackToJavascriptWithoutResultForCommand:command];
 }
 
 - (void) getVersionName :(CDVInvokedUrlCommand*)command {
@@ -181,7 +223,7 @@
     [self callbackToJavascriptWithResult:result ForCommand:command];
 }
 
-- (void) updateRegistrationToken :(CDVInvokedUrlCommand*)command {
+- (void) updatePushNotificationToken :(CDVInvokedUrlCommand*)command {
     NSArray* arguments = [command arguments];
     NSData* devToken;
     if(arguments != nil && arguments.count > 0) {
@@ -192,11 +234,12 @@
     NSLog(@"Registration token value: %@", devToken);
     [self.commandDelegate runInBackground:^{
         [[Hotline sharedInstance] updateDeviceToken:devToken];
+        [self callbackToJavascriptWithoutResultForCommand:command];
     }];
     NSLog(@"Registration token has been updated");
 }
 
-- (void) isHotlinePushNotificationInternal :(CDVInvokedUrlCommand*)command {
+- (void) _isHotlinePushNotification :(CDVInvokedUrlCommand*)command {
     NSLog(@"checking if hotline push notification");
     NSArray* arguments = [command arguments];
     NSDictionary* info;
@@ -218,6 +261,7 @@
     NSDictionary* info = [arguments firstObject];
     [self.commandDelegate runInBackground:^{
         [[Hotline sharedInstance]handleRemoteNotification:info andAppstate:[UIApplication sharedApplication].applicationState];
+        [self callbackToJavascriptWithoutResultForCommand:command];
     }];
 }
 @end

@@ -28,10 +28,15 @@ cordova platform add ios
 ```
 
 2. Add the hotline plugin to your project.
+
+You can add the plugin from command line like:
 ```shell
 cordova plugin add hotline
 ```
-
+You can also add it to your config.xml like 
+```javascript
+<plugin name="hotline" source="npm"/>
+```
 
 ### Initializing the plugin
 
@@ -124,9 +129,51 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
         filteredViewTitle   : "Tags"
     });
     ```
+    v1.1 adds support for filtering both categories and filters,
+    Example of filtering FAQs by Articles.
+    ```javascript
+    window.Hotline.showFAQs( {
+        tags :["sample","video"],
+        filteredViewTitle   : "Tags",
+        articleType   : Hotline.FilterType.ARTICLE
+    });
+    ```
+    v1.1 adds support for filtering both categories and filters,
+    Example of filtering FAQs by Categories.
+    ```javascript
+    window.Hotline.showFAQs( {
+        tags :["sample","video"],
+        filteredViewTitle   : "Tags",
+        articleType   : Hotline.FilterType.CATEGORY
+    });
+    ```
+    Not specifying an articleType, by default filters by Article.
+
 * Hotline.showConversations()
     - Launch Channels / Conversations.
-    
+  
+  v1.1 also adds supportto filter conversations with tags. This filters the list of channels shown to the user.
+  Example showing how to filter converstions using tags.
+  ```javascript
+    window.Hotline.showConversations( {
+        tags :["new","test"],
+        filteredViewTitle   : "Tags"
+    });
+    ```
+    NOTE:- Filtering conversations is also supported inside FAQs, i.e show conversation button from the category list
+    or the article list view can also be filtered. Here is a sample.
+    ```javascript
+    window.Hotline.showFAQs( {
+        tags :["sample","video"],
+        filteredViewTitle   : "Tags",
+        articleType   : Hotline.FilterType.CATEGORY,
+        contactusTags : ["test"], 
+        contactusFilterTitle: "contactusTags"
+    });
+    ```
+In the above example clicking on show conversations in the filtered category list view takes you to a conversation
+view filtered by the tag "test".
+
 * Hotline.unreadCount(callback)
     - Fetch count of unread messages from agents.
     
@@ -168,13 +215,38 @@ It can be installed by the following command :
 ```shell
 cordova plugin add https://github.com/freshdesk/phonegap-plugin-push.git
 ```
+Or you can add it to your config.xml like:
+```javascript
+<plugin name="phonegap-plugin-push" spec="https://github.com/freshdesk/phonegap-plugin-push.git">
+        <param name="SENDER_ID" value="XXXXXXXXXX" />
+    </plugin>
+```
+
+Initialize the push plugin and it will handle registering the tokens and displaying the notifications.
+here is a sample init function, call this in your onDeviceReady
+```javascript
+function initializePush() {
+    var push = PushNotification.init({
+        "android":{
+            "senderID":"20738924380"
+        },
+        "ios": {
+            "alert": "true",
+            "badge": "true",
+            "sound": "true"
+        },
+        "windows": {}
+    });
+}
+```
+If you decide to handle push notifications with some other plugin, here are some of the APIs you will need.
 
 When you receive a deviceToken from GCM or APNS , you need to update the deviceToken in hotline as follows
-
+*warning* updateRegistrationToken is now deprecated and replaced with updatePushNotificationToken from v1.2.0 and above
 ```javascript
     // Example illustrates usage for phonegap-push-plugin
     push.on('registration',function(data) {
-        window.Hotline.updateRegistrationToken(data.registrationId);
+        window.Hotline.updatePushNotificationToken(data.registrationId);
      });
 ```
 
@@ -230,6 +302,7 @@ If you have been using the registerPushNotification call up until now, we recomm
 window.Hotline.registerPushNotification('ANDROID_SENDER_ID'); // takes care of registration and handling of push notification on iOS and Android.
 ```
 
+updateRegistrationToken has been replaced from v1.2.0
 #### Caveats
 
 ##### Android :

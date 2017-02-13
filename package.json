@@ -1,6 +1,6 @@
 {
   "name": "hotline",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Plugin for integrating the Hotline SDK into a Phonegap/Cordova project",
   "cordova": {
     "id": "cordova-plugin-hotline",
@@ -21,6 +21,7 @@
     "ecosystem:cordova",
     "cordova-android",
     "cordova-ios",
+    "faq",
     "chat",
     "support"
   ],

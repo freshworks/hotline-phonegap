@@ -4,5 +4,5 @@ repositories{
 }
 
 dependencies {
-    compile 'com.github.freshdesk:hotline-android:1.2.0'
+    compile 'com.github.freshdesk:hotline-android:1.2.1'
 }

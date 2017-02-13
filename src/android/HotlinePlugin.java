@@ -266,7 +266,7 @@ public class HotlinePlugin extends CordovaPlugin {
                     return true;
                 }
 
-                if(action.equals("isHotlinePushNotificationInternal")) {
+                if(action.equals("_isHotlinePushNotification")) {
                     Log.d(LOG_TAG,"check if a particular push notificaiton is a hotline push notification or not");
                     if(args.length() == 0) {
                         Log.e(LOG_TAG,"Please provide the notification payload to be verified ");
@@ -301,7 +301,7 @@ public class HotlinePlugin extends CordovaPlugin {
                     return true;
                 }
 
-                if(action.equals("updateRegistrationToken")) {
+                if(action.equals("updatePushNotificationToken")) {
                     if(args.length() == 0) {
                         Log.e(LOG_TAG,"Please provide the token to register");
                         return false;

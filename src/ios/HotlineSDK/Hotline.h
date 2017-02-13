@@ -234,6 +234,15 @@ enum TagFilterType {
  */
 -(UIViewController*) getFAQsControllerForEmbed;
 /**
+ *  Get an embeddable controller for FAQs with filter options
+ *
+ *  @discussion Return a controller with FAQ view that can be embedded in other Controllers (e.g. in a UITabBarController )
+ *
+ *  @return UIController for FAQs filter View
+ *
+ */
+-(UIViewController*) getFAQsControllerForEmbedWithOptions:(FAQOptions *) faqOptions;
+/**
  *  Get an embeddable controller for Conversations
  *
  *  @discussion Return a controller with Conversation view that can be embedded in other Controllers (e.g. in a UITabBarController )
@@ -242,6 +251,16 @@ enum TagFilterType {
  *
  */
 -(UIViewController*) getConversationsControllerForEmbed;
+/**
+ *  Get an embeddable controller for Conversations with filter options
+ *
+ *  @discussion Return a controller with Conversation view that can be embedded in other Controllers (e.g. in a UITabBarController )
+ *
+ *  @return UIController for Conversation filter View
+ *
+ */
+-(UIViewController*) getConversationsControllerForEmbedWithOptions:(ConversationOptions *) convOptions;
+
 /**
  *  Get the last updated unread messages count.
  *
@@ -261,6 +280,17 @@ enum TagFilterType {
  */
 -(void)unreadCountWithCompletion:(void(^)(NSInteger count))completion;
 
+/**
+ *  Get the unread conversations count.
+ *
+ *  @discussion This method lets you asynchronously fetch the latest count of conversations that require the user's attention. It is updated with a 2 min interval.
+ *
+ *  @param tags Tags of channels for which unread count is required.
+ *  @param completion Completion block with count.
+ *
+ */
+-(void)unreadCountForTags:(NSArray *)tags withCompletion:(void(^)(NSInteger count))completion;
+
 -(void)updateConversationBannerMessage:(NSString *)message;
 
 /**
@@ -269,6 +299,7 @@ enum TagFilterType {
 -(void) sendMessage:(HotlineMessage *)messageObject;
 
 @end
+
 
 @interface HotlineUser : NSObject
 
@@ -301,7 +332,11 @@ enum TagFilterType {
 
 @end
 
-@interface FAQOptions : NSObject
+@interface HotlineOptions : NSObject
+
+@end
+
+@interface FAQOptions : HotlineOptions
 
 /*
  * Option to Switch between Grid and List view in FAQs. Shows FAQ categories as a list when set to NO.
@@ -381,7 +416,7 @@ enum TagFilterType {
 @end
 
 
-@interface ConversationOptions : NSObject
+@interface ConversationOptions : HotlineOptions
 
 /**
  *  Show Filtered Channels

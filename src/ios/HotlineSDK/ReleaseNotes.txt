@@ -1,8 +1,17 @@
 Hotline iOS SDK - Powered by Freshdesk
 
-Documentation   : https://hotline.freshdesk.com/support/solutions
+Documentation   : https://support.hotline.io/support/solutions
 Support Email   : support@hotline.io 
-Version         : 1.3.1
+Version         : 1.3.2
+
+Ver 1.3.2 
+__________________________
+You can now use FAQOptions and ConversationOptions with Embedded Support view as well. 
+Optimizations for Polling Fetch used when push notification is not enabled. 
+Option to override CSS file for theming Article content.
+Get count of message by Channel by using tags for channels.
+Optimized Image preview for attachments sent by Agent for iPad. 
+Minor Fixes. 
 
 Ver 1.3.1 
 __________________________

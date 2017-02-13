@@ -41,7 +41,7 @@ var Hotline = {}
 
 Hotline.isHotlinePushNotification = function(args, cb){
     
-    Hotline.isHotlinePushNotificationInternal(args,function(success, isHotline){
+    Hotline._isHotlinePushNotification(args,function(success, isHotline){
         cb(success, isHotline === 1 );
     });
 }
@@ -58,7 +58,7 @@ Hotline.init = function(args, cb){
 }
 
 Hotline.trackPhoneGapSDKVersion = function() {
-  this.updateUserProperties({ Phonegap : "v1.1"});
+  this.updateUserProperties({ Phonegap : "v1.2.0"});
 }
 
 Hotline.clearUserData = function() {
@@ -77,9 +77,10 @@ var functionList = [
     "showConversations",
     "showFAQs",
     "getVersionName",
-    "isHotlinePushNotificationInternal",
+    "_isHotlinePushNotification",
     "handlePushNotification",
-    "updateRegistrationToken"
+    "updatePushNotificationToken",
+    "updateAndroidNotificationProperties"
 ];
 
 functionList.forEach(function(funcName) {
