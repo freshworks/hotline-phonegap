@@ -55,7 +55,7 @@ public class HotlinePlugin extends CordovaPlugin {
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        cordovaContext = cordova.getActivity();
+        cordovaContext = cordova.getActivity().getApplicationContext();
     }
 
     public Bundle jsonToBundle(JSONObject jsonObject) throws JSONException {
@@ -103,12 +103,8 @@ public class HotlinePlugin extends CordovaPlugin {
                     if(initArgs.has("pictureMessagingEnabled")) {
                         hotlineConfig.setPictureMessagingEnabled(initArgs.getBoolean("pictureMessagingEnabled"));
                     }
-                    cordova.getThreadPool().execute( new Runnable() {
-                       public void run() {
-                            Hotline.getInstance(cordovaContext).init(hotlineConfig);
-                            callbackContext.success();
-                       }
-                    });
+                    Hotline.getInstance(cordovaContext).init(hotlineConfig);
+                    callbackContext.success();
                     this.isInitialized = true;
                     return true;
                 }
@@ -213,13 +209,8 @@ public class HotlinePlugin extends CordovaPlugin {
                     if(jsonArgs.has("countryCode") && jsonArgs.has("phoneNumber")) {
                         hotlineUser.setPhone(jsonArgs.getString("countryCode"),jsonArgs.getString("phoneNumber"));
                     }
-
-                    cordova.getThreadPool().execute( new Runnable() {
-                       public void run() {
-                            Hotline.getInstance(cordovaContext).updateUser(hotlineUser);
-                            callbackContext.success();
-                       }
-                    });
+                    Hotline.getInstance(cordovaContext).updateUser(hotlineUser);
+                    callbackContext.success();
                     return true;
                 }
 

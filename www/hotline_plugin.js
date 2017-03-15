@@ -58,7 +58,7 @@ Hotline.init = function(args, cb){
 }
 
 Hotline.trackPhoneGapSDKVersion = function() {
-  this.updateUserProperties({ Phonegap : "v1.2.0"});
+  this.updateUserProperties({ Phonegap : "v1.2.1"});
 }
 
 Hotline.clearUserData = function() {
