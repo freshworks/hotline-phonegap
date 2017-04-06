@@ -70,7 +70,7 @@ document.addEventListener("deviceready", function(){
     voiceMessagingEnabled   : true,
     pictureMessagingEnabled : true
 });
- ```
+```
  The init function is also a callback function and can be implemented like so:
 
  ```javascript
@@ -88,7 +88,7 @@ document.addEventListener("deviceready", function(){
 
  Once initialized you can call Hotline APIs using the window.Hotline object.
 
- ```javascript
+```javascript
 //After initializing Hotline
 showSupportChat = function() {
   window.Hotline.showConversations();
@@ -98,13 +98,13 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
 
 //in index.html
 //<button id="launch_conversations"> Inbox </button>
- ```
+```
 
 ### Hotline APIs
 * Hotline.showFAQs()
     - Launch FAQ / Self Help
     
-    The following FAQOptions can be passed to the showFAQs() call
+    The following FAQOptions can be passed to the showFAQs() API
     
         -showFaqCategoriesAsGrid
         -showContactUsOnAppBar
@@ -120,49 +120,41 @@ document.getElementById("launch_conversations").onclick = showSupportChat;
         showContactUsOnFaqNotHelpful:false
     });
     ```
-    Tags can also be passed as parameters to filer solution articles,
-    Here is a sample call to showFAQs() implementing tags.
-    
+    #### Filtering and displaying a subset of FAQ Categories and/or FAQs
+    Eg. To filter and display a set of FAQs tagged with *sample* and *video*
     ```javascript
     window.Hotline.showFAQs( {
-        tags :["sample","video"],
-        filteredViewTitle   : "Tags"
-    });
-    ```
-    v1.1 adds support for filtering both categories and filters,
-    Example of filtering FAQs by Articles.
-    ```javascript
-    window.Hotline.showFAQs( {
-        tags :["sample","video"],
+        tags : ["sample","video"],
         filteredViewTitle   : "Tags",
         articleType   : Hotline.FilterType.ARTICLE
     });
     ```
-    v1.1 adds support for filtering both categories and filters,
-    Example of filtering FAQs by Categories.
+    Not specifying an articleType, by default filters by Article.
+    
+    From version 1.1, support for filtering FAQ categores is available.
+    Eg. To filter and display a set of categories tagged with *sample* and *video* ,
     ```javascript
     window.Hotline.showFAQs( {
-        tags :["sample","video"],
-        filteredViewTitle   : "Tags",
-        articleType   : Hotline.FilterType.CATEGORY
+        tags : ["sample","video"],
+        filteredViewTitle : "Tags"
+        articleType : Hotline.FilterType.CATEGORY
     });
     ```
-    Not specifying an articleType, by default filters by Article.
 
 * Hotline.showConversations()
     - Launch Channels / Conversations.
   
-  v1.1 also adds supportto filter conversations with tags. This filters the list of channels shown to the user.
+  v1.1 also adds support to filter conversations with tags. This filters the list of channels shown to the user.
   Example showing how to filter converstions using tags.
-  ```javascript
+```javascript
     window.Hotline.showConversations( {
         tags :["new","test"],
         filteredViewTitle   : "Tags"
     });
-    ```
+```
 NOTE:- Filtering conversations is also supported inside FAQs, i.e show conversation button from the category list
 or the article list view can also be filtered. Here is a sample.
-  ```javascript
+```javascript
     window.Hotline.showFAQs( {
         tags :["sample","video"],
         filteredViewTitle   : "Tags",
@@ -170,7 +162,7 @@ or the article list view can also be filtered. Here is a sample.
         contactusTags : ["test"], 
         contactusFilterTitle: "contactusTags"
     });
-    ```
+```
 
 In the above example clicking on show conversations in the filtered category list view takes you to a conversation
 view filtered by the tag "test".
@@ -210,8 +202,9 @@ window.Hotline.unreadCount(function(success,val) {
 ```
 
 #### Push Notifications
-
+##### 1. Recommended Option
 To setup push notifications we recommend using our forked version of the phonegap-plugin-push available [here] (https://github.com/freshdesk/phonegap-plugin-push) .
+
 It can be installed by the following command : 
 ```shell
 cordova plugin add https://github.com/freshdesk/phonegap-plugin-push.git
@@ -219,8 +212,8 @@ cordova plugin add https://github.com/freshdesk/phonegap-plugin-push.git
 Or you can add it to your config.xml like:
 ```javascript
 <plugin name="phonegap-plugin-push" spec="https://github.com/freshdesk/phonegap-plugin-push.git">
-        <param name="SENDER_ID" value="XXXXXXXXXX" />
-    </plugin>
+    <param name="SENDER_ID" value="XXXXXXXXXX" />
+</plugin>
 ```
 
 Initialize the push plugin and it will handle registering the tokens and displaying the notifications.
@@ -240,31 +233,41 @@ function initializePush() {
     });
 }
 ```
-If you decide to handle push notifications with some other plugin, here are some of the APIs you will need.
+##### 2. Alternate Option for Push
+Follow the steps below if your app handles push notifications using any other plugin.
 
-When you receive a deviceToken from GCM or APNS , you need to update the deviceToken in hotline as follows
-*warning* updateRegistrationToken is now deprecated and replaced with updatePushNotificationToken from v1.2.0 and above
-```javascript
-    // Example illustrates usage for phonegap-push-plugin
-    push.on('registration',function(data) {
-        window.Hotline.updatePushNotificationToken(data.registrationId);
-     });
-```
+##### 2a. Pass device token to Hotline
 
-Whenever a push notification is received. You will need to check if the notification originated from Hotline and have Hotline SDK handle it.
+When you receive a deviceToken from GCM or APNS , you need to send the deviceToken to hotline as follows
+API name has changed for passing the token since version 1.2.0.
+
+| Version | Method name|
+|---|---|
+|1.2.0 and later | updatePushNotificationToken |
+| less than 1.2.0 | updateRegistrationToken |
 
 ```javascript
 // Example illustrates usage for phonegap-push-plugin
-push.on('notification',function(data) {
+push.on('registration',function(data) {
+  window.Hotline.updatePushNotificationToken(data.registrationId);
+});
+```
+##### 2b. Pass the notification to Hotline SDK
+
+Whenever the app receives a push notification, check and pass the notification to Hotline SDK 
+
+```javascript
+// Example illustrates usage for phonegap-push-plugin
+push.on('notification', function(data) {
   window.Hotline.isHotlinePushNotification(data.additionalData, function(success, isHotlineNotif) {
     if( success && isHotlineNotif ) {
       window.Hotline.handlePushNotification(data.additionalData);
     }
- });
+  });
 });
 ```
-
-Android notification properties can be changed with the updateAndroidNotificationProperties API. The properties that can be updated are.
+##### Push Notification Customizations
+Android notifications can be customized with the *updateAndroidNotificationProperties* API. Following is a list of properties that can be customized.
 
 -  "notificationSoundEnabled" : Notifiction sound enabled or not.
 -  "smallIcon" : Setting a small notification icon (move the image to drawbles folder and pass the name of the jpeg file as parameter).
@@ -274,7 +277,7 @@ Android notification properties can be changed with the updateAndroidNotificatio
 -  "launchActivityOnFinish" : Activity to launch on up navigation from the messages screen launched from notification. The messages screen will have no activity to navigate up to in the backstack when its launched from notification. Specify the activity class name to be launched.
 
 
-The API is called like:
+The API can be invoked as below:
     
 ```javascript
 window.Hotline.updateAndroidNotificationProperties({
@@ -286,7 +289,7 @@ window.Hotline.updateAndroidNotificationProperties({
                 "launchActivityOnFinish" : "MainActivity.class.getName()"
             });
 ```
-List of hotline Priorities:
+Options for *notificationPriority* are as below:
 
 -  Hotline.NotificationPriority.PRIORITY_DEFAULT
 -  Hotline.NotificationPriority.PRIORITY_HIGH
@@ -294,7 +297,8 @@ List of hotline Priorities:
 -  Hotline.NotificationPriority.PRIORITY_MAX
 -  Hotline.NotificationPriority.PRIORITY_MIN
 
-They follow the same priority order as Android's NotificaitonCompat.
+This follow the same priority order as Android's NotificaitonCompat class.
+
 ##### DEPRECATED!
 
 If you have been using the registerPushNotification call up until now, we recommend you use the method suggested above as we are removing support for it
@@ -303,7 +307,6 @@ If you have been using the registerPushNotification call up until now, we recomm
 window.Hotline.registerPushNotification('ANDROID_SENDER_ID'); // takes care of registration and handling of push notification on iOS and Android.
 ```
 
-updateRegistrationToken has been replaced from v1.2.0
 #### Caveats
 
 ##### Android :
