@@ -39,14 +39,17 @@
             <uses-permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" />
             <permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" android:protectionLevel="signature" />
         </config-file>
+
+        <config-file target="res/values/strings.xml" parent="/resources">
+            <string name="hotline_file_provider_authority">com.rapidue.uzed.provider</string>
+        </config-file>
+
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <provider android:authorities="$PACKAGE_NAME.provider" android:exported="false" android:grantUriPermissions="true" android:name="android.support.v4.content.FileProvider">
                 <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/hotline_file_provider_paths" />
             </provider>
         </config-file>
-        <config-file target="res/values/strings.xml" parent="/resources">
-            <string name="hotline_file_provider_authority">$PACKAGE_NAME.provider</string>
-        </config-file>
+
         <!-- Including the HotlineSDK(which is included as such) as a framework -->
         <!-- The custom parameter makes Cordova look for the gradle file in a relative location rather than the Android SDK -->
         <framework src="src/android/Hotline/build.gradle" custom="true" type="gradleReference" />
