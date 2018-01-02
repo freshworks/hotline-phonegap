@@ -41,11 +41,11 @@
             <permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" android:protectionLevel="signature" />
         </config-file>
 
-        <!--<config-file target="res/values/strings.xml" parent="/resources">
+        <config-file target="res/values/strings.xml" parent="/resources">
             <string name="hotline_file_provider_authority">$PACKAGE_NAME.provider</string>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <!--<config-file target="AndroidManifest.xml" parent="/manifest/application">
             <provider android:authorities="$PACKAGE_NAME.provider" android:exported="false" android:grantUriPermissions="true" android:name="android.support.v4.content.FileProvider">
                 <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/hotline_file_provider_paths" />
             </provider>
